@@ -22,10 +22,10 @@ export default function ContactsManager() {
     // Load contacts from localStorage (for demo)
     const savedContacts = localStorage.getItem('havacilar_contacts');
     if (savedContacts) {
-      setContacts(JSON.parse(savedContacts));
+      setContacts(JSON.parse(savedContacts) as Contact[]);
     } else {
       // Sample data if no contacts exist
-      const sampleContacts = [
+      const sampleContacts: Contact[] = [
         {
           id: 1,
           name: 'Ahmet Yılmaz',
@@ -34,7 +34,7 @@ export default function ContactsManager() {
           subject: 'real-estate',
           message: 'Gayrimenkul projeleriniz hakkında detaylı bilgi almak istiyorum. Özellikle İstanbul\'daki projeler...',
           date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
-          status: 'pending'
+          status: 'pending' as 'pending'
         },
         {
           id: 2,
@@ -44,7 +44,7 @@ export default function ContactsManager() {
           subject: 'aviation',
           message: 'Havacılık yatırımları konusunda görüşmek istiyorum.',
           date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
-          status: 'responded'
+          status: 'responded' as 'responded'
         },
         {
           id: 3,
@@ -53,7 +53,7 @@ export default function ContactsManager() {
           subject: 'investment',
           message: 'Yatırım danışmanlığı hizmetleriniz hakkında bilgi rica ediyorum.',
           date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
-          status: 'pending'
+          status: 'pending' as 'pending'
         }
       ];
       setContacts(sampleContacts);
