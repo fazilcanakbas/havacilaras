@@ -3,10 +3,28 @@ import React, { useState } from 'react';
 import { Save, FileText, Globe, Edit } from 'lucide-react';
 import sampleData from '@/data/sampleData.json';
 
+type Language = 'tr' | 'en';
+
+type CorporateContent = {
+  mission: string;
+  vision: string;
+  values: string;
+};
+
+type HomeContent = {
+  // Add fields for home section as needed
+  placeholder?: string;
+};
+
+type ContentType = {
+  corporate: Record<Language, CorporateContent>;
+  home: Record<Language, HomeContent>;
+};
+
 export default function ContentManager() {
   const [activeSection, setActiveSection] = useState<'corporate' | 'home'>('corporate');
-  const [activeLanguage, setActiveLanguage] = useState<'tr' | 'en'>('tr');
-  const [content, setContent] = useState(sampleData.content);
+  const [activeLanguage, setActiveLanguage] = useState<Language>('tr');
+  const [content, setContent] = useState<ContentType>(sampleData.content as ContentType);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
