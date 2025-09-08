@@ -1,0 +1,128 @@
+{
+  "announcements": [
+    {
+      "id": 1,
+      "title": {
+        "tr": "Yeni Havacılık Projesi Duyurusu",
+        "en": "New Aviation Project Announcement"
+      },
+      "description": {
+        "tr": "İstanbul'da yeni hangar tesisimiz için yapım çalışmaları başladı.",
+        "en": "Construction work has started for our new hangar facility in Istanbul."
+      },
+      "date": "2024-01-15",
+      "image": "https://images.pexels.com/photos/912050/pexels-photo-912050.jpeg",
+      "category": "aviation"
+    },
+    {
+      "id": 2,
+      "title": {
+        "tr": "Gayrimenkul Yatırım Fırsatı",
+        "en": "Real Estate Investment Opportunity"
+      },
+      "description": {
+        "tr": "Antalya Marina Residences projesi için erken rezervasyon kampanyası başladı.",
+        "en": "Early reservation campaign started for Antalya Marina Residences project."
+      },
+      "date": "2024-01-10",
+      "image": "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg",
+      "category": "real-estate"
+    },
+    {
+      "id": 3,
+      "title": {
+        "tr": "Stratejik Ortaklık Anlaşması",
+        "en": "Strategic Partnership Agreement"
+      },
+      "description": {
+        "tr": "Uluslararası havacılık şirketi ile stratejik ortaklık anlaşması imzalandı.",
+        "en": "Strategic partnership agreement signed with international aviation company."
+      },
+      "date": "2024-01-05",
+      "image": "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg",
+      "category": "corporate"
+    },
+    {
+      "id": 4,
+      "title": {
+        "tr": "Sürdürülebilirlik Projesi",
+        "en": "Sustainability Project"
+      },
+      "description": {
+        "tr": "Green Valley projemiz çevre dostu inşaat sertifikası aldı.",
+        "en": "Our Green Valley project received environmental friendly construction certificate."
+      },
+      "date": "2023-12-28",
+      "image": "https://images.pexels.com/photos/87223/pexels-photo-87223.jpeg",
+      "category": "real-estate"
+    },
+    {
+      "id": 5,
+      "title": {
+        "tr": "Eğitim Merkezi Açılışı",
+        "en": "Training Center Opening"
+      },
+      "description": {
+        "tr": "Ankara'daki havacılık eğitim merkezimiz hizmete girdi.",
+        "en": "Our aviation training center in Ankara started service."
+      },
+      "date": "2023-12-20",
+      "image": "https://images.pexels.com/photos/358220/pexels-photo-358220.jpeg",
+      "category": "aviation"
+    },
+    {
+      "id": 6,
+      "title": {
+        "tr": "Yıl Sonu Değerlendirmesi",
+        "en": "Year-End Evaluation"
+      },
+      "description": {
+        "tr": "2023 yılında gerçekleştirdiğimiz projeler ve 2024 hedefleri.",
+        "en": "Projects we completed in 2023 and our 2024 goals."
+      },
+      "date": "2023-12-15",
+      "image": "https://images.pexels.com/photos/439227/pexels-photo-439227.jpeg",
+      "category": "corporate"
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Ahmet Yılmaz",
+      "email": "ahmet.yilmaz@email.com",
+      "message": "Gayrimenkul projeleriniz hakkında detaylı bilgi almak istiyorum.",
+      "date": "2024-01-20",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "name": "Mehmet Kaya",
+      "email": "mehmet.kaya@email.com",
+      "message": "Havacılık yatırımları konusunda görüşmek istiyorum.",
+      "date": "2024-01-18",
+      "status": "responded"
+    },
+    {
+      "id": 3,
+      "name": "Fatma Demir",
+      "email": "fatma.demir@email.com",
+      "message": "Antalya'daki villa projesi hakkında bilgi rica ediyorum.",
+      "date": "2024-01-15",
+      "status": "pending"
+    }
+  ],
+  "content": {
+    "corporate": {
+      "tr": {
+        "mission": "Havacılık ve gayrimenkul sektöründe yenilikçi çözümler sunarak, müşterilerimizin yatırım hedeflerine ulaşmalarını sağlamak ve sürdürülebilir değer yaratmak.",
+        "vision": "Havacılık ve gayrimenkul yatırım danışmanlığında Türkiye'nin lider şirketi olarak, uluslararası arenada tanınan güvenilir bir marka olmak.",
+        "values": "Güvenilirlik ve Şeffaflık, Müşteri Odaklı Yaklaşım, Profesyonellik ve Kalite, Yenilikçilik ve Sürdürülebilirlik"
+      },
+      "en": {
+        "mission": "To provide innovative solutions in aviation and real estate sectors, helping our clients achieve their investment goals and creating sustainable value.",
+        "vision": "To become Turkey's leading company in aviation and real estate investment consultancy, recognized as a trusted brand in the international arena.",
+        "values": "Reliability and Transparency, Customer-Focused Approach, Professionalism and Quality, Innovation and Sustainability"
+      }
+    }
+  }
+}
