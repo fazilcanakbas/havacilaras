@@ -20,7 +20,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${
+    <header className={`fixed w-full z-[9999] transition-all duration-300 ${
       isScrolled 
         ? 'bg-corporate-navy shadow-xl backdrop-blur-sm' 
         : 'bg-transparent'

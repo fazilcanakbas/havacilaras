@@ -6,11 +6,12 @@ import HeroSection from '@/components/HeroSection';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { TrendingUp, Users, Globe2, CheckCircle2, Instagram as InstagramIcon, Linkedin, Phone, MessageCircle, Mail, Youtube } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { getContactInfo, getYoutubeVideoId } from '@/app/services/settings.service';
 import data from '@/data/sampleData.json';
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,8 +39,9 @@ export default function Home() {
   // Duyurular (KALDIRILDI - kullanıcı isteği ile görünmüyor)
   // const featuredAnnouncements = [...]
 
+  const locale = language === 'tr' ? 'tr-TR' : 'en-US';
   const formatDate = (ds: string) =>
-    new Date(ds).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+    new Date(ds).toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
 
   // Instagram mock grid (3 postluk, görsel + link)
   const mockInstagram = [
@@ -87,7 +89,8 @@ export default function Home() {
     },
   ];
 
-  const homeProjects = [
+  // Gayrimenkul Yatırım Projeleri
+  const realEstateProjects = [
     {
       name: "L'AVENTURE",
       imageLogo:
@@ -111,30 +114,46 @@ export default function Home() {
       imagePlain:
         'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine.webp',
       href: '/projects/real-estate',
+     },
+    // {
+    //   name: 'MY HOUSE Elegant',
+    //   imageLogo:
+    //     'https://aderansconstruction.com/wp-content/uploads/2025/02/myhouseelegant2.webp',
+    //   imagePlain:
+    //     'https://aderansconstruction.com/wp-content/uploads/2025/02/myhouseelegant.webp',
+    //   href: '/projects/real-estate',
+    // },
+    // {
+    //   name: 'CITRUS Garden',
+    //   imageLogo:
+    //     'https://aderansconstruction.com/wp-content/uploads/2025/02/citrusgarden2.webp',
+    //   imagePlain:
+    //     'https://aderansconstruction.com/wp-content/uploads/2025/02/citrusgarden.webp',
+    //   href: '/projects/real-estate',
+    // },
+    // {
+    //   name: 'ELLY',
+    //   imageLogo:
+    //     'https://aderansconstruction.com/wp-content/uploads/2025/02/hillyelm2.webp',
+    //   imagePlain:
+    //     'https://aderansconstruction.com/wp-content/uploads/2025/02/hillyelm.webp',
+    //   href: '/projects/real-estate',
+    // },
+  ];
+
+  // Havacılık Yatırım Projeleri (örnek veri, görseller opsiyonel)
+  const aviationProjects = [
+    {
+      name: 'Flight Training Center',
+      href: '/projects/aviation',
     },
     {
-      name: 'MY HOUSE Elegant',
-      imageLogo:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/myhouseelegant2.webp',
-      imagePlain:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/myhouseelegant.webp',
-      href: '/projects/real-estate',
+      name: 'MRO Hangar Expansion',
+      href: '/projects/aviation',
     },
     {
-      name: 'CITRUS Garden',
-      imageLogo:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/citrusgarden2.webp',
-      imagePlain:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/citrusgarden.webp',
-      href: '/projects/real-estate',
-    },
-    {
-      name: 'ELLY',
-      imageLogo:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/hillyelm2.webp',
-      imagePlain:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/hillyelm.webp',
-      href: '/projects/real-estate',
+      name: 'Airport Services JV',
+      href: '/projects/aviation',
     },
   ];
 
@@ -185,39 +204,35 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy mb-6">
                 {t('home.intro.title')}
               </h2>
-              <p className="text-lg text-corporate-text leading-relaxed mb-5">
-                Havacılar Yatırım; havacılık ve gayrimenkul alanlarında değer üreten, uçtan uca danışmanlık ve proje geliştirme hizmetleri sunar. Fizibiliteden finansmana, tasarımdan pazarlamaya kadar tüm süreçleri şeffaf ve ölçülebilir KPI'larla yönetir.
-              </p>
-              <p className="text-lg text-corporate-text leading-relaxed mb-6">
-                Yatırımcılarımıza sürdürülebilir büyüme, düşük risk ve yüksek verim hedefiyle; kurumsal yönetim, teknolojik altyapı ve uluslararası iş ağımızla destek veriyoruz.
-              </p>
+        <p className="text-lg text-corporate-text leading-relaxed mb-5">{t('home.intro.p1')}</p>
+        <p className="text-lg text-corporate-text leading-relaxed mb-6">{t('home.intro.p2')}</p>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="text-corporate-blue mt-1" />
-                  <span className="text-corporate-text">Sektörel uzmanlık ve güçlü tedarikçi ağı</span>
+          <span className="text-corporate-text">{t('home.intro.b1')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="text-corporate-blue mt-1" />
-                  <span className="text-corporate-text">Şeffaf raporlama ve yatırımcı odaklı yönetim</span>
+          <span className="text-corporate-text">{t('home.intro.b2')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="text-corporate-blue mt-1" />
-                  <span className="text-corporate-text">Uçtan uca proje geliştirme ve operasyon desteği</span>
+          <span className="text-corporate-text">{t('home.intro.b3')}</span>
                 </li>
               </ul>
 
               <div className="mt-8 grid grid-cols-3 gap-4">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-corporate-navy">10+</div>
-                  <div className="text-sm text-corporate-text">Yıl deneyim</div>
+                  <div className="text-sm text-corporate-text">{t('home.stats.years')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-corporate-navy">25+</div>
-                  <div className="text-sm text-corporate-text">Tamamlanan proje</div>
+                  <div className="text-sm text-corporate-text">{t('home.stats.projects')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-corporate-navy">7</div>
-                  <div className="text-sm text-corporate-text">Ülke iş birliği</div>
+                  <div className="text-sm text-corporate-text">{t('home.stats.countries')}</div>
                 </div>
               </div>
             </div>
@@ -259,29 +274,98 @@ export default function Home() {
       {/* Projeler */}
       <section className="py-16 fade-in-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy mb-10 text-center">
-            Projeler
+          <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy mb-8 text-center">
+            {t('projects.title')}
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
-            {homeProjects.map((p) => (
-              <a
-                key={p.name}
-                href={p.href}
-                className="group relative block overflow-hidden shadow-lg bg-black aspect-[5/5] md:aspect-[5/4]"
-              >
-                <img
-                  src={p.imagePlain}
-                  alt={`${p.name} background`}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <img
-                  src={p.imageLogo}
-                  alt={p.name}
-                  className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0"
-                />
-              </a>
-            ))}
-          </div>
+
+          <Tabs defaultValue="real-estate" className="w-full">
+            <div className="flex justify-center">
+              <TabsList className="bg-white border border-gray-200 rounded-full p-1">
+                <TabsTrigger
+                  value="real-estate"
+                  className="rounded-full px-4 py-2 text-sm font-semibold data-[state=active]:bg-corporate-blue data-[state=active]:text-white data-[state=active]:shadow-sm"
+                >
+                  {t('projects.realestate')}
+                </TabsTrigger>
+                <TabsTrigger
+                  value="aviation"
+                  className="rounded-full px-4 py-2 text-sm font-semibold data-[state=active]:bg-corporate-blue data-[state=active]:text-white data-[state=active]:shadow-sm"
+                >
+                  {t('projects.aviation')}
+                </TabsTrigger>
+              </TabsList>
+            </div>
+
+            <TabsContent value="real-estate" className="mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+                {realEstateProjects.map((p: any) => (
+                  <a
+                    key={p.name}
+                    href={p.href}
+                    className="group relative block overflow-hidden rounded-xl shadow-lg bg-black aspect-[5/5] md:aspect-[5/4]"
+                  >
+                    {p.imagePlain ? (
+                      <img
+                        src={p.imagePlain}
+                        alt={`${p.name} arka plan`}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-corporate-blue/20 to-corporate-navy/30" />
+                    )}
+                    {p.imageLogo ? (
+                      <img
+                        src={p.imageLogo}
+                        alt={p.name}
+                        className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="px-3 py-1.5 rounded-md bg-white/90 text-corporate-navy text-sm font-semibold">
+                          {p.name}
+                        </span>
+                      </div>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="aviation" className="mt-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
+                {aviationProjects.map((p: any) => (
+                  <a
+                    key={p.name}
+                    href={p.href}
+                    className="group relative block overflow-hidden rounded-xl shadow-lg bg-black aspect-[5/5] md:aspect-[5/4]"
+                  >
+                    {p.imagePlain ? (
+                      <img
+                        src={p.imagePlain}
+                        alt={`${p.name} arka plan`}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-corporate-blue/20 to-corporate-navy/30" />
+                    )}
+                    {p.imageLogo ? (
+                      <img
+                        src={p.imageLogo}
+                        alt={p.name}
+                        className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="px-3 py-1.5 rounded-md bg-white/90 text-corporate-navy text-sm font-semibold">
+                          {p.name}
+                        </span>
+                      </div>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
@@ -290,23 +374,27 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10 flex items-end justify-between">
             <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy">
-              Öne Çıkan Duyurular
+              {t('home.announcements.title')}
             </h2>
             <a href="/announcements" className="text-corporate-blue hover:underline font-medium">
-              Tüm duyurular →
+              {t('home.announcements.all')} →
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {featuredAnnouncements.map((a: any) => (
-              <a key={a.id} href={`/announcements`} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-white">
-                <img src={a.image} alt={a.title?.tr || 'duyuru'} className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="p-5">
-                  <div className="text-xs text-corporate-blue font-semibold mb-1">{formatDate(a.date)}</div>
-                  <h3 className="text-lg font-bold text-corporate-text mb-2 line-clamp-2">{a.title?.tr}</h3>
-                  <p className="text-sm text-corporate-text/80 line-clamp-3">{a.description?.tr}</p>
-                </div>
-              </a>
-            ))}
+            {featuredAnnouncements.map((a: any) => {
+              const title = a.title?.[language] || a.title?.tr || '';
+              const desc = a.description?.[language] || a.description?.tr || '';
+              return (
+                <a key={a.id} href={`/announcements`} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-white">
+                  <img src={a.image} alt={title || 'announcement'} className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="p-5">
+                    <div className="text-xs text-corporate-blue font-semibold mb-1">{formatDate(a.date)}</div>
+                    <h3 className="text-lg font-bold text-corporate-text mb-2 line-clamp-2">{title}</h3>
+                    <p className="text-sm text-corporate-text/80 line-clamp-3">{desc}</p>
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -322,9 +410,7 @@ export default function Home() {
               <h3 className="text-xl font-bold font-montserrat text-white mb-4">
                 {t('home.highlights.trusted')}
               </h3>
-              <p className="text-white/80 leading-relaxed">
-                Güvenilir ve sürdürülebilir yatırım çözümleri ile sektörde öncü konumdayız.
-              </p>
+              <p className="text-white/80 leading-relaxed">{t('home.highlights.trusted.desc')}</p>
             </div>
 
             <div className="text-center card-hover card-glow bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
@@ -334,9 +420,7 @@ export default function Home() {
               <h3 className="text-xl font-bold font-montserrat text-white mb-4">
                 {t('home.highlights.professional')}
               </h3>
-              <p className="text-white/80 leading-relaxed">
-                Alanında uzman kadromuz ile kapsamlı danışmanlık hizmetleri sunuyoruz.
-              </p>
+              <p className="text-white/80 leading-relaxed">{t('home.highlights.professional.desc')}</p>
             </div>
 
             <div className="text-center card-hover card-glow bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
@@ -346,9 +430,7 @@ export default function Home() {
               <h3 className="text-xl font-bold font-montserrat text-white mb-4">
                 {t('home.highlights.international')}
               </h3>
-              <p className="text-white/80 leading-relaxed">
-                Uluslararası standartlarda projeler ve küresel iş ortaklıkları geliştiriyoruz.
-              </p>
+              <p className="text-white/80 leading-relaxed">{t('home.highlights.international.desc')}</p>
             </div>
           </div>
         </div>
@@ -439,17 +521,18 @@ export default function Home() {
 
 
 
-      {/* CTA Section - themed and placed above Footer */}
+  {/* CTA Section - themed and placed above Footer */
+  /* Localized investment-focused copy */}
       <section className="py-20 fade-in-section bg-gradient-to-br from-corporate-navy to-corporate-blue/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             {/* Content */}
             <div className="text-white">
               <h2 className="text-3xl md:text-4xl font-bold font-montserrat leading-tight mb-6">
-                Hayalinizdeki Villayı Bulmanın Zamanı Geldi
+        {t('cta.title')}
               </h2>
               <p className="text-lg text-white/85 mb-8 leading-relaxed">
-                Antalya'nın en prestijli lokasyonlarında yer alan lüks villalarımızı keşfedin. Uzman ekibimiz size en uygun seçenekleri sunmak için hazır.
+        {t('cta.desc')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -458,7 +541,7 @@ export default function Home() {
                   onClick={() => (window.location.href = `tel:${formatPhoneForCall(contactInfo.phone)}`)}
                 >
                   <TrendingUp className="w-5 h-5 mr-2" />
-                  Hemen Ara
+                  {t('cta.primary')}
                 </Button>
                 <Button
                   variant="outline"
@@ -466,7 +549,7 @@ export default function Home() {
                   onClick={() => window.open(`https://wa.me/${formatPhoneForWhatsApp(contactInfo.phone)}`, '_blank')}
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
-                  WhatsApp
+                  {t('cta.secondary')}
                 </Button>
               </div>
 
@@ -490,7 +573,7 @@ export default function Home() {
             <div className="relative h-96 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
               <iframe
                 src={`https://www.youtube-nocookie.com/embed/${videoId}`}
-                title="Tanıtım Videosu"
+                title={t('cta.videoTitle')}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

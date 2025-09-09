@@ -30,13 +30,33 @@ export default function Corporate() {
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-navy-gradient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-6 animate-fade-in-up">
-            {t('corporate.title')}
-          </h1>
-          <div className="w-24 h-1 bg-corporate-blue mx-auto"></div>
+  {/* Hero Section (Banner under the header with black overlay) */}
+  <section className="relative z-0">
+        <div
+          className="relative h-[280px] sm:h-[340px] md:h-[420px] w-full overflow-hidden"
+        >
+          {/* background image */}
+          <div
+            className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: "url('/bg.jpg')" }}
+            aria-hidden="true"
+          />
+          {/* solid black overlay */}
+          <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+
+          {/* centered text */}
+          <div className="relative z-10 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-4 drop-shadow">
+                  {t('corporate.title')}
+                </h1>
+                <p className="text-white/90 text-base md:text-lg max-w-3xl mx-auto leading-relaxed drop-shadow">
+                  {t('corporate.tagline')}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

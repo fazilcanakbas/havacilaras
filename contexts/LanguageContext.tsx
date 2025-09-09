@@ -30,9 +30,29 @@ const translations = {
     // Home
     'home.intro.title': 'Havacılar Yatırım Hakkında',
     'home.intro.text': 'Uzman ekibimizle havacılık ve gayrimenkul projelerinde stratejik çözümler sunuyoruz.',
+  'home.intro.p1': 'Havacılar Yatırım; havacılık ve gayrimenkul alanlarında değer üreten, uçtan uca danışmanlık ve proje geliştirme hizmetleri sunar. Fizibiliteden finansmana, tasarımdan pazarlamaya kadar tüm süreçleri şeffaf ve ölçülebilir KPI\'larla yönetir.',
+  'home.intro.p2': 'Yatırımcılarımıza sürdürülebilir büyüme, düşük risk ve yüksek verim hedefiyle; kurumsal yönetim, teknolojik altyapı ve uluslararası iş ağımızla destek veriyoruz.',
+  'home.intro.b1': 'Sektörel uzmanlık ve güçlü tedarikçi ağı',
+  'home.intro.b2': 'Şeffaf raporlama ve yatırımcı odaklı yönetim',
+  'home.intro.b3': 'Uçtan uca proje geliştirme ve operasyon desteği',
+  'home.stats.years': 'Yıl deneyim',
+  'home.stats.projects': 'Tamamlanan proje',
+  'home.stats.countries': 'Ülke iş birliği',
+  'home.announcements.title': 'Öne Çıkan Duyurular',
+  'home.announcements.all': 'Tüm duyurular',
     'home.highlights.trusted': 'Güvenilir Yatırım',
+  'home.highlights.trusted.desc': 'Güvenilir ve sürdürülebilir yatırım çözümleri ile sektörde öncü konumdayız.',
     'home.highlights.professional': 'Profesyonel Danışmanlık',
+  'home.highlights.professional.desc': 'Alanında uzman kadromuz ile kapsamlı danışmanlık hizmetleri sunuyoruz.',
     'home.highlights.international': 'Uluslararası Deneyim',
+  'home.highlights.international.desc': 'Uluslararası standartlarda projeler ve küresel iş ortaklıkları geliştiriyoruz.',
+
+  // CTA
+  'cta.title': 'Yatırımlarınızı Güçlendirin',
+  'cta.desc': 'Gayrimenkul ve havacılık alanlarında sürdürülebilir, şeffaf ve ölçülebilir yatırım çözümleri sunuyoruz. Uzman ekibimizle riskleri azaltın, verimi artırın.',
+  'cta.primary': 'Danışmanla Görüş',
+  'cta.secondary': 'WhatsApp',
+  'cta.videoTitle': 'Yatırım Tanıtım Videosu',
     
     // Corporate
     'corporate.title': 'Kurumsal',
@@ -40,6 +60,7 @@ const translations = {
     'corporate.mission': 'Misyon',
     'corporate.vision': 'Vizyon',
     'corporate.values': 'Değerler',
+  'corporate.tagline': 'Havacılık ve gayrimenkul alanlarında sürdürülebilir ve şeffaf yatırım çözümleri',
     
     // Projects
     'projects.title': 'Projelerimiz',
@@ -94,9 +115,29 @@ const translations = {
     // Home
     'home.intro.title': 'About Havacılar Investment',
     'home.intro.text': 'We provide strategic solutions in aviation and real estate projects with our expert team.',
+  'home.intro.p1': 'Havacılar Investment offers end-to-end consulting and project development in aviation and real estate. From feasibility to financing, from design to marketing, we manage all processes with transparent and measurable KPIs.',
+  'home.intro.p2': 'We support our investors with corporate governance, technological infrastructure, and an international business network to achieve sustainable growth, lower risk, and high efficiency.',
+  'home.intro.b1': 'Sector expertise and strong supplier network',
+  'home.intro.b2': 'Transparent reporting and investor-focused management',
+  'home.intro.b3': 'End-to-end project development and operational support',
+  'home.stats.years': 'Years of experience',
+  'home.stats.projects': 'Completed projects',
+  'home.stats.countries': 'Countries partnered',
+  'home.announcements.title': 'Featured Announcements',
+  'home.announcements.all': 'All announcements',
     'home.highlights.trusted': 'Trusted Investment',
+  'home.highlights.trusted.desc': 'We are a leader in the sector with reliable and sustainable investment solutions.',
     'home.highlights.professional': 'Professional Consulting',
+  'home.highlights.professional.desc': 'We offer comprehensive consulting services with our expert team.',
     'home.highlights.international': 'International Experience',
+  'home.highlights.international.desc': 'We develop projects to international standards and global partnerships.',
+
+  // CTA
+  'cta.title': 'Empower Your Investments',
+  'cta.desc': 'We provide sustainable, transparent, and measurable investment solutions in real estate and aviation. Reduce risks and maximize efficiency with our expert team.',
+  'cta.primary': 'Talk to an Advisor',
+  'cta.secondary': 'WhatsApp',
+  'cta.videoTitle': 'Investment Intro Video',
     
     // Corporate
     'corporate.title': 'Corporate',
@@ -104,6 +145,7 @@ const translations = {
     'corporate.mission': 'Mission',
     'corporate.vision': 'Vision',
     'corporate.values': 'Values',
+  'corporate.tagline': 'Sustainable and transparent investment solutions in aviation and real estate',
     
     // Projects
     'projects.title': 'Our Projects',
