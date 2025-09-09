@@ -1,122 +1,48 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MapPin, Calendar, TrendingUp } from 'lucide-react';
+import { MapPin, Calendar } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
-interface Project {
-  id: number;
-  title: {
-    tr: string;
-    en: string;
-  };
-  description: {
-    tr: string;
-    en: string;
-  };
-  image: string;
-  location: string;
-  date: string;
-  status: 'planned' | 'ongoing' | 'completed';
-}
+// Construction / On-Sale project sets (example; adapt as needed)
+interface SimpleProject { name: string; imageLogo?: string; imagePlain?: string; href: string; location?: string; delivery?: string; }
+const underConstruction: SimpleProject[] = [
+  {
+    name: "L'AVENTURE",
+    imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure2.webp',
+    imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure.webp',
+    href: '#',
+    location: 'Alanya',
+    delivery: '2026'
+  },
+  {
+    name: 'ULTRAMARINE',
+    imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine2.webp',
+    imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine.webp',
+    href: '#',
+    location: 'Alanya',
+    delivery: '2026'
+  }
+];
 
-const realEstateProjects: Project[] = [
+const onSale: SimpleProject[] = [
   {
-    id: 1,
-    title: {
-      tr: 'Skyline Apartments',
-      en: 'Skyline Apartments'
-    },
-    description: {
-      tr: 'Modern yaşam alanları ve panoramik şehir manzarası sunan lüks konut projesi.',
-      en: 'Luxury residential project offering modern living spaces and panoramic city views.'
-    },
-    image: 'https://images.pexels.com/photos/323775/pexels-photo-323775.jpeg',
-    location: 'İstanbul, Türkiye',
-    date: '2024',
-    status: 'ongoing'
-  },
-  {
-    id: 2,
-    title: {
-      tr: 'Luxury Villas',
-      en: 'Luxury Villas'
-    },
-    description: {
-      tr: 'Deniz manzaralı özel tasarım villalar ile prestijli yaşam alanları.',
-      en: 'Prestigious living spaces with custom-designed villas featuring sea views.'
-    },
-    image: 'https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg',
-    location: 'Antalya, Türkiye',
-    date: '2025',
-    status: 'planned'
-  },
-  {
-    id: 3,
-    title: {
-      tr: 'City Towers',
-      en: 'City Towers'
-    },
-    description: {
-      tr: 'Şehir merkezinde ticari ve konut alanlarını birleştiren karma kullanım projesi.',
-      en: 'Mixed-use project combining commercial and residential spaces in the city center.'
-    },
-    image: 'https://images.pexels.com/photos/417045/pexels-photo-417045.jpeg',
-    location: 'Ankara, Türkiye',
-    date: '2023',
-    status: 'completed'
-  },
-  {
-    id: 4,
-    title: {
-      tr: 'Marina Residences',
-      en: 'Marina Residences'
-    },
-    description: {
-      tr: 'Marina kenarında konumlanmış üst segment konut ve ticaret merkezi.',
-      en: 'Premium residential and commercial center located by the marina.'
-    },
-    image: 'https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg',
-    location: 'İzmir, Türkiye',
-    date: '2024',
-    status: 'ongoing'
-  },
-  {
-    id: 5,
-    title: {
-      tr: 'Green Valley',
-      en: 'Green Valley'
-    },
-    description: {
-      tr: 'Doğayla iç içe sürdürülebilir konut projesi ve yaşam merkezi.',
-      en: 'Sustainable residential project and living center in harmony with nature.'
-    },
-    image: 'https://images.pexels.com/photos/87223/pexels-photo-87223.jpeg',
-    location: 'Bursa, Türkiye',
-    date: '2025',
-    status: 'planned'
-  },
-  {
-    id: 6,
-    title: {
-      tr: 'Business Plaza',
-      en: 'Business Plaza'
-    },
-    description: {
-      tr: 'Modern ofis alanları ve konferans merkezlerinden oluşan iş merkezi.',
-      en: 'Business center consisting of modern office spaces and conference centers.'
-    },
-    image: 'https://images.pexels.com/photos/439227/pexels-photo-439227.jpeg',
-    location: 'İstanbul, Türkiye',
-    date: '2023',
-    status: 'completed'
+    name: 'AQUAMARINE',
+    imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine2.webp',
+    imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine.webp',
+    href: '#',
+    location: 'Alanya',
+    delivery: '2025'
   }
 ];
 
 export default function RealEstateProjects() {
   const { t, language } = useLanguage();
-  const [filter, setFilter] = useState<'all' | 'planned' | 'ongoing' | 'completed'>('all');
+  // Removed old status filter; using tabs now
+
+  // (Removed animated pill logic per request)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -136,153 +62,130 @@ export default function RealEstateProjects() {
     return () => observer.disconnect();
   }, []);
 
-  const filteredProjects = filter === 'all' 
-    ? realEstateProjects 
-    : realEstateProjects.filter(project => project.status === filter);
-
-  const getStatusBadge = (status: string) => {
-    const statusConfig = {
-      planned: { text: 'Planlanan', color: 'bg-blue-100 text-blue-800' },
-      ongoing: { text: 'Devam Eden', color: 'bg-yellow-100 text-yellow-800' },
-      completed: { text: 'Tamamlanan', color: 'bg-green-100 text-green-800' }
-    };
-    
-    return statusConfig[status as keyof typeof statusConfig];
-  };
+  // Utility for card content (optional future)
 
   return (
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-navy-gradient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-6 animate-fade-in-up">
-            {t('projects.realestate')}
-          </h1>
-          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-            {t('projects.subtitle')}
-          </p>
-          <div className="w-24 h-1 bg-corporate-blue mx-auto"></div>
-        </div>
-      </section>
-
-      {/* Filter Section */}
-      <section className="py-8 bg-corporate-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-                filter === 'all' 
-                  ? 'bg-corporate-navy text-white' 
-                  : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
-              }`}
-            >
-              Tümü
-            </button>
-            <button
-              onClick={() => setFilter('planned')}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-                filter === 'planned' 
-                  ? 'bg-corporate-navy text-white' 
-                  : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
-              }`}
-            >
-              Planlanan
-            </button>
-            <button
-              onClick={() => setFilter('ongoing')}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-                filter === 'ongoing' 
-                  ? 'bg-corporate-navy text-white' 
-                  : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
-              }`}
-            >
-              Devam Eden
-            </button>
-            <button
-              onClick={() => setFilter('completed')}
-              className={`px-6 py-2 rounded-full font-semibold transition-all duration-300 ${
-                filter === 'completed' 
-                  ? 'bg-corporate-navy text-white' 
-                  : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
-              }`}
-            >
-              Tamamlanan
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="py-20 bg-corporate-navy fade-in-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <div
-                key={project.id}
-                className="bg-white rounded-xl overflow-hidden shadow-lg card-hover card-glow"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="relative overflow-hidden group">
-                  <img
-                    src={project.image}
-                    alt={project.title[language]}
-                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 right-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusBadge(project.status)?.color}`}>
-                      {getStatusBadge(project.status)?.text}
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-montserrat text-corporate-navy mb-3">
-                    {project.title[language]}
-                  </h3>
-                  
-                  <p className="text-corporate-text mb-4 line-clamp-3">
-                    {project.description[language]}
-                  </p>
-                  
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <MapPin className="h-4 w-4 mr-2 text-corporate-blue" />
-                      {project.location}
-                    </div>
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-2 text-corporate-blue" />
-                      {project.date}
-                    </div>
-                  </div>
-                  
-                  <button className="mt-6 w-full bg-corporate-navy text-white py-2 rounded-lg hover:bg-corporate-blue transition-colors duration-300 font-semibold">
-                    Detayları Görüntüle
-                  </button>
-                </div>
+      {/* Hero Section (Corporate style banner) */}
+      <section className="relative z-0">
+        <div className="relative h-[260px] sm:h-[320px] md:h-[400px] w-full overflow-hidden">
+          {/* background image */}
+          <div
+            className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: "url('/bg.jpg')" }}
+            aria-hidden="true"
+          />
+          {/* dark overlay */}
+          <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+          {/* centered content */}
+          <div className="relative z-10 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-4 drop-shadow">
+                  {t('projects.realestate')}
+                </h1>
+                <p className="text-white/90 text-base md:text-lg max-w-3xl mx-auto leading-relaxed drop-shadow">
+                  {t('projects.subtitle')}
+                </p>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Tabs Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Tabs defaultValue="construction" className="w-full">
+            <div className="flex justify-center mb-12">
+              <div className="relative w-full max-w-2xl">
+                {/* Background glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-corporate-blue/20 via-blue-500/20 to-corporate-navy/20 rounded-2xl blur-lg opacity-60"></div>
+                
+                                <TabsList className="relative flex flex-col sm:flex-row w-full gap-2">
+                  <TabsTrigger 
+                    value="construction" 
+                    className="w-full h-12 flex items-center justify-center px-6 text-sm font-semibold tracking-wide transition-colors rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-corporate-blue data-[state=active]:to-corporate-navy data-[state=active]:text-white data-[state=inactive]:bg-white data-[state=inactive]:text-corporate-navy/80 border border-transparent data-[state=inactive]:border-corporate-navy/10 sm:flex-1"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-current opacity-60 group-data-[state=active]:opacity-100"></div>
+                      {t('projects.construction')}
+                    </span>
+                  </TabsTrigger>
+                  
+                  <TabsTrigger 
+                    value="onsale" 
+                    className="w-full h-12 flex items-center justify-center px-6 text-sm font-semibold tracking-wide transition-colors rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-corporate-blue data-[state=active]:to-corporate-navy data-[state=active]:text-white data-[state=inactive]:bg-white data-[state=inactive]:text-corporate-navy/80 border border-transparent data-[state=inactive]:border-corporate-navy/10 sm:flex-1"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-current opacity-60 group-data-[state=active]:opacity-100"></div>
+                      {t('projects.onsale')}
+                    </span>
+                  </TabsTrigger>
+                </TabsList>
+              </div>
+            </div>
+            <style jsx>{`
+              .no-scrollbar::-webkit-scrollbar { display: none; }
+              .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+              /* no custom indicator */
+            `}</style>
+            <TabsContent value="construction" className="mt-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {underConstruction.map((p) => (
+                  <a key={p.name} href={p.href} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-black aspect-[5/5] sm:aspect-[5/4]">
+                    {p.imagePlain ? <img src={p.imagePlain} alt={`${p.name} arka plan`} className="absolute inset-0 h-full w-full object-cover" /> : <div className="absolute inset-0 bg-gradient-to-br from-corporate-blue/20 to-corporate-navy/30" />}
+                    {p.imageLogo ? (
+                      <img src={p.imageLogo} alt={p.name} className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="px-3 py-1.5 rounded-md bg-white/90 text-corporate-navy text-sm font-semibold">{p.name}</span>
+                      </div>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="onsale" className="mt-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {onSale.map((p) => (
+                  <a key={p.name} href={p.href} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-black aspect-[5/5] sm:aspect-[5/4]">
+                    {p.imagePlain ? <img src={p.imagePlain} alt={`${p.name} arka plan`} className="absolute inset-0 h-full w-full object-cover" /> : <div className="absolute inset-0 bg-gradient-to-br from-corporate-blue/20 to-corporate-navy/30" />}
+                    {p.imageLogo ? (
+                      <img src={p.imageLogo} alt={p.name} className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="px-3 py-1.5 rounded-md bg-white/90 text-corporate-navy text-sm font-semibold">{p.name}</span>
+                      </div>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+  {/* Removed old projects grid */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-corporate-blue fade-in-section">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-white mb-6">
-            Yatırım Fırsatları
+      <section className="py-24 bg-gradient-to-br from-corporate-gray via-white to-corporate-gray/40 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none [mask-image:radial-gradient(circle_at_center,black,transparent)] bg-[repeating-linear-gradient(45deg,rgba(10,38,64,0.06)_0,rgba(10,38,64,0.06)_2px,transparent_2px,transparent_6px)]" />
+        <div className="relative max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy mb-6 tracking-tight">
+            {t('projects.cta.title')}
           </h2>
-          <p className="text-xl text-white/90 mb-8">
-            Gayrimenkul projelerimiz hakkında detaylı bilgi almak ve yatırım fırsatlarını değerlendirmek için bizimle iletişime geçin.
+          <p className="text-lg md:text-xl text-corporate-text/90 leading-relaxed max-w-3xl mx-auto mb-10">
+            {t('projects.cta.desc')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/contact" className="bg-white text-corporate-blue px-8 py-3 rounded-lg font-semibold hover:bg-corporate-gray transition-colors duration-300">
-              İletişime Geçin
+            <a href="/contact" className="px-8 h-14 inline-flex items-center justify-center rounded-xl bg-corporate-navy text-white font-semibold tracking-wide hover:bg-corporate-blue transition shadow-lg ring-1 ring-black/10">
+              {t('projects.cta.contact')}
             </a>
-            <a href="/announcements" className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-corporate-blue transition-colors duration-300">
-              Duyuruları İncele
+            <a href="/announcements" className="px-8 h-14 inline-flex items-center justify-center rounded-xl bg-white text-corporate-navy font-semibold tracking-wide border border-corporate-navy/20 hover:border-corporate-blue hover:text-corporate-blue transition shadow-sm">
+              {t('projects.cta.announcements')}
             </a>
           </div>
         </div>
