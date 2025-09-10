@@ -244,8 +244,9 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">{t('contact.phone')}</h3>
-                      <p className="text-white/80">+90 242 000 00 00</p>
-                      <p className="text-white/80">+90 535 000 00 00</p>
+                      <a href={`tel:${'+90 242 000 00 00'.replace(/\s/g, '')}`} className="text-white/80 hover:text-white underline underline-offset-2">+90 242 000 00 00</a>
+                      <br />
+                      <a href={`tel:${'+90 535 000 00 00'.replace(/\s/g, '')}`} className="text-white/80 hover:text-white underline underline-offset-2">+90 535 000 00 00</a>
                     </div>
                   </div>
 
@@ -255,8 +256,9 @@ export default function Contact() {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1">{t('contact.email')}</h3>
-                      <p className="text-white/80">info@havacilar.com</p>
-                      <p className="text-white/80">yatirim@havacilar.com</p>
+                      <a href="mailto:info@havacilar.com" className="text-white/80 hover:text-white underline underline-offset-2">info@havacilar.com</a>
+                      <br />
+                      <a href="mailto:yatirim@havacilar.com" className="text-white/80 hover:text-white underline underline-offset-2">yatirim@havacilar.com</a>
                     </div>
                   </div>
 

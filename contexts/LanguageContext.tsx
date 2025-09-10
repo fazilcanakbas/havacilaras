@@ -25,7 +25,7 @@ const translations = {
 
     // Hero
     'hero.title': 'Geleceğe Yatırım, Havacılıkla Başlar',
-    'hero.subtitle': 'Gayrimenkul ve havacılıkta stratejik danışmanlık.',
+    'hero.subtitle': 'Gayrimenkul ve havacılık yatırım projeleri.',
     'hero.cta': 'Projelerimizi Keşfedin',
     
     // Home
@@ -37,7 +37,7 @@ const translations = {
   'home.intro.b2': 'Şeffaf raporlama ve yatırımcı odaklı yönetim',
   'home.intro.b3': 'Uçtan uca proje geliştirme ve operasyon desteği',
   'home.stats.years': 'Yıl deneyim',
-  'home.stats.projects': 'Tamamlanan proje',
+  'home.stats.projects': 'Devam Eden proje',
   'home.stats.countries': 'Ülke iş birliği',
   'home.announcements.title': 'Öne Çıkan Duyurular',
   'home.announcements.all': 'Tüm duyurular',
@@ -95,7 +95,7 @@ const translations = {
     'projects.realestate': 'Gayrimenkul Yatırım Projeleri',
     'projects.aviation': 'Havacılık Yatırım Projeleri',
   'projects.construction': 'Yapım Aşamasında Projeler',
-  'projects.onsale': 'Satışı Tamamlanan Projeler',
+  'projects.onsale': 'Tamamlanan Projeler',
   'projects.cta.title': 'Yatırım Fırsatları',
   'projects.cta.desc': 'Gayrimenkul projelerimiz hakkında detaylı bilgi almak ve yatırım fırsatlarını değerlendirmek için bizimle iletişime geçin.',
   'projects.cta.contact': 'İletişime Geçin',
@@ -128,7 +128,7 @@ const translations = {
     'footer.hours.saturday': 'Cumartesi',
     'footer.hours.sunday': 'Pazar',
     'footer.hours.closed': 'Kapalı',
-    'footer.copyright': '© 2025 Havacılar Yatırım. Tüm hakları saklıdır.',
+    'footer.copyright': '© 2025 Bloomo Media Tarafından Geliştirildi. Tüm hakları saklıdır. ',
     
   // Project detail
   'project.overview': 'Proje Özeti',
@@ -209,7 +209,7 @@ const translations = {
   'home.intro.b2': 'Transparent reporting and investor-focused management',
   'home.intro.b3': 'End-to-end project development and operational support',
   'home.stats.years': 'Years of experience',
-  'home.stats.projects': 'Completed projects',
+  'home.stats.projects': 'Ongoing projects',
   'home.stats.countries': 'Countries partnered',
   'home.announcements.title': 'Featured Announcements',
   'home.announcements.all': 'All announcements',
@@ -267,7 +267,7 @@ const translations = {
     'projects.realestate': 'Real Estate Investment Projects',
     'projects.aviation': 'Aviation Investment Projects',
   'projects.construction': 'Under Construction Projects',
-  'projects.onsale': 'Sale Completed Projects ',
+  'projects.onsale': 'Completed Projects ',
   'projects.cta.title': 'Investment Opportunities',
   'projects.cta.desc': 'Contact us to get detailed information about our real estate projects and evaluate current investment opportunities.',
   'projects.cta.contact': 'Contact Us',
@@ -300,7 +300,7 @@ const translations = {
     'footer.hours.saturday': 'Saturday',
     'footer.hours.sunday': 'Sunday',
     'footer.hours.closed': 'Closed',
-    'footer.copyright': '© 2025 Havacılar Investment. All rights reserved.',
+    'footer.copyright': '© 2025 Developed by Bloomo Media. All rights reserved.',
     
   // Project detail
   'project.overview': 'Project Overview',

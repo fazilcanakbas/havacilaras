@@ -91,30 +91,32 @@ export default function Home() {
 
   // Gayrimenkul Yatırım Projeleri
   const realEstateProjects = [
+   
+  {
+    name: "L'AVENTURE",
+    slug: "laventure-cyprus",
+    imageLogo: '/laventure 1.jpg',
+    imagePlain: '/laventure 2.jpg',
+    location: 'Alanya',
+    delivery: '2026'
+  },
+  {
+    name: 'SHELLWE',
+    slug: "shellwe-maldives",
+    imageLogo: '/shellwe 1.jpg',
+    imagePlain: '/shellwe2.jpg',
+    location: 'Alanya',
+    delivery: '2026'
+  },
+    
     {
-      name: "L'AVENTURE",
-      imageLogo:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure2.webp',
-      imagePlain:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure.webp',
-      href: '/projects/gayrimenkulyatirim/laventure-cyprus',
-    },
-    {
-      name: 'AQUAMARINE',
-      imageLogo:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine2.webp',
-      imagePlain:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine.webp',
-      href: '/projects/gayrimenkulyatirim/aquamarine-cyprus',
-    },
-    {
-      name: 'ULTRAMARINE',
-      imageLogo:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine2.webp',
-      imagePlain:
-        'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine.webp',
-      href: '/projects/gayrimenkulyatirim/shellwe',
-     },
+    name: 'GLORIES DELUXE KEMER',
+    slug: "glorious-deluxe-kemer",
+    imageLogo: '/gloruius 1.jpg',
+    imagePlain: '/gloruius 2.jpg',
+    location: 'Alanya',
+    delivery: '2025'
+  }
     // {
     //   name: 'MY HOUSE Elegant',
     //   imageLogo:
@@ -144,16 +146,16 @@ export default function Home() {
   // Havacılık Yatırım Projeleri (örnek veri, görseller opsiyonel)
   const aviationProjects = [
     {
-      name: 'Flight Training Center',
-      href: '/projects/havacilikyatirim',
+  name: 'Flight Training Center',
+  slug: 'flight-training-center',
     },
     {
-      name: 'MRO Hangar Expansion',
-      href: '/projects/havacilikyatirim',
+  name: 'MRO Hangar Expansion',
+  slug: 'mro-hangar-expansion',
     },
     {
-      name: 'Airport Services JV',
-      href: '/projects/havacilikyatirim',
+  name: 'Airport Services JV',
+  slug: 'airport-services-jv',
     },
   ];
 
@@ -223,47 +225,28 @@ export default function Home() {
 
               <div className="mt-8 grid grid-cols-3 gap-4">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-corporate-navy">10+</div>
+                  <div className="text-3xl font-bold text-corporate-navy">3+</div>
                   <div className="text-sm text-corporate-text">{t('home.stats.years')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-corporate-navy">25+</div>
+                  <div className="text-3xl font-bold text-corporate-navy">3+</div>
                   <div className="text-sm text-corporate-text">{t('home.stats.projects')}</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-corporate-navy">7</div>
+                  <div className="text-3xl font-bold text-corporate-navy">4</div>
                   <div className="text-sm text-corporate-text">{t('home.stats.countries')}</div>
                 </div>
               </div>
             </div>
 
             <div className="relative">
-              <div className="rounded-2xl border border-corporate-blue/20 bg-white/70 backdrop-blur-md shadow-xl p-6 overflow-hidden">
-                <div className="relative h-72 w-full rounded-xl bg-gradient-to-br from-corporate-blue/5 to-corporate-navy/10">
-                  {/* grid */}
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(8,33,56,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(8,33,56,0.06)_1px,transparent_1px)] bg-[size:24px_24px] rounded-xl" />
-
-                  {/* animated svg */}
-                  <svg viewBox="0 0 200 200" className="absolute inset-0 m-auto h-[85%] w-[85%]">
-                    <g fill="none" stroke="#0A66C2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M30 170 L30 80 L90 50 L160 80 L160 170 Z" className="draw" />
-                      <path d="M60 150 L60 110 L90 95 L120 110 L120 150 Z" className="draw" />
-                      <path d="M30 120 L160 120" className="draw" />
-                      <path d="M90 50 L90 80" className="draw" />
-                      <path d="M120 150 L160 150" className="draw" />
-                      <path d="M30 150 L60 150" className="draw" />
-                    </g>
-                  </svg>
-
-                  <style>{`
-                    .draw {
-                      stroke-dasharray: 600;
-                      stroke-dashoffset: 600;
-                      animation: dash 2.4s ease forwards;
-                    }
-                    @keyframes dash { to { stroke-dashoffset: 0; } }
-                  `}</style>
-                </div>
+              <div className="rounded-2xl border border-corporate-blue/20 bg-white/70 backdrop-blur-md shadow-xl overflow-hidden">
+                <img
+                  src="/hero1.jpg"
+                  alt="Havacılar Yatırım"
+                  className="h-72 w-full object-cover"
+                  loading="lazy"
+                />
               </div>
               <div className="pointer-events-none absolute -inset-3 rounded-3xl bg-gradient-to-r from-corporate-blue/10 to-corporate-navy/10 blur-xl" />
             </div>
@@ -300,10 +283,10 @@ export default function Home() {
 
             <TabsContent value="real-estate" className="mt-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
-                {realEstateProjects.map((p: any) => (
+        {realEstateProjects.map((p: any) => (
                   <a
-                    key={p.name}
-                    href={p.href}
+          key={p.slug || p.name}
+          href={`/projects/gayrimenkulyatirim/${p.slug}`}
                     className="group relative block overflow-hidden rounded-xl shadow-lg bg-black aspect-[5/5] md:aspect-[5/4]"
                   >
                     {p.imagePlain ? (
@@ -335,10 +318,10 @@ export default function Home() {
 
             <TabsContent value="aviation" className="mt-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8">
-                {aviationProjects.map((p: any) => (
+        {aviationProjects.map((p: any) => (
                   <a
-                    key={p.name}
-                    href={p.href}
+          key={p.slug || p.name}
+          href={`/projects/havacilikyatirim/${p.slug}`}
                     className="group relative block overflow-hidden rounded-xl shadow-lg bg-black aspect-[5/5] md:aspect-[5/4]"
                   >
                     {p.imagePlain ? (
@@ -557,16 +540,24 @@ export default function Home() {
 
               <div className="mt-8 flex flex-wrap items-center gap-6 text-white/85">
                 {contactInfo.phone && (
-                  <div className="flex items-center gap-2">
+                  <a
+                    href={`tel:${formatPhoneForCall(contactInfo.phone)}`}
+                    className="flex items-center gap-2 hover:text-white"
+                    aria-label="Call"
+                  >
                     <Phone className="w-4 h-4" />
                     <span>{contactInfo.phone}</span>
-                  </div>
+                  </a>
                 )}
                 {contactInfo.email && (
-                  <div className="flex items-center gap-2">
+                  <a
+                    href={`mailto:${contactInfo.email}`}
+                    className="flex items-center gap-2 hover:text-white"
+                    aria-label="Email"
+                  >
                     <Mail className="w-4 h-4" />
                     <span>{contactInfo.email}</span>
-                  </div>
+                  </a>
                 )}
               </div>
             </div>

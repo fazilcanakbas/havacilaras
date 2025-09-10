@@ -178,7 +178,7 @@ const projectsData: Record<string, any> = {
     highlightedText: "by Havacılar",
     plainText: "Kuzey Kıbrıs — Tatlısu. Akdeniz’in incisi, lüks yaşam ve yatırım fırsatı.",
     plainTextEn: "Northern Cyprus — Tatlısu. Jewel of the Mediterranean, luxury living and investment opportunity.",
-    logo: "/laventure-1.png",
+    logo: "/laventurelogo-1.png",
     slogan: "Lüks, Doğa ve Huzurun Buluşma Noktası",
     sloganEn: "Where Luxury Meets Nature and Serenity",
     overview: {
@@ -822,7 +822,7 @@ export default function ProjectDetailPage() {
         <p className="text-slate-200 mt-2 max-w-xl">{language === 'en' ? project.financial.infoEn ?? project.financial.info : project.financial.info}</p>
             </div>
             <div className="mt-6 md:mt-0 w-full md:w-[420px]">
-              <MiniChart />
+              {/* <MiniChart /> */}
             </div>
           </div>
         </section>
@@ -991,28 +991,28 @@ function HeroStrip({ title, subtitle, img }: any) {
   );
 }
 
-function MiniChart() {
-  const bars = [9, 8, 7, 6, 5, 4, 3, 2];
-  return (
-    <div className="bg-white/4 p-3 rounded-lg">
-      <svg viewBox="0 0 220 100" className="w-full h-28">
-        {bars.map((b, i) => (
-          <rect
-            key={i}
-            x={i * 26 + 6}
-            y={100 - b * 9}
-            width={18}
-            height={b * 9}
-            rx={3}
-            fill="#3A7BD5"
-            opacity={0.95}
-          />
-        ))}
-      </svg>
-      <div className="text-xs text-slate-300 mt-2">Örnek amortisman görselleştirmesi</div>
-    </div>
-  );
-}
+// function MiniChart() {
+//   const bars = [9, 8, 7, 6, 5, 4, 3, 2];
+//   return (
+//     <div className="bg-white/4 p-3 rounded-lg">
+//       <svg viewBox="0 0 220 100" className="w-full h-28">
+//         {bars.map((b, i) => (
+//           <rect
+//             key={i}
+//             x={i * 26 + 6}
+//             y={100 - b * 9}
+//             width={18}
+//             height={b * 9}
+//             rx={3}
+//             fill="#3A7BD5"
+//             opacity={0.95}
+//           />
+//         ))}
+//       </svg>
+//       <div className="text-xs text-slate-300 mt-2">Örnek amortisman görselleştirmesi</div>
+//     </div>
+//   );
+// }
 
 function AdvantageCard({ icon, text }: { icon: any; text: string }) {
   return (

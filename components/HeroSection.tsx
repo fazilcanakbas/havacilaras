@@ -57,7 +57,7 @@ export default function HeroSection() {
         </p>
         
         <Link 
-          href="/projects/real-estate" 
+          href="/projects/gayrimenkulyatirim" 
           className="btn-corporate inline-block animate-fade-in-up animation-delay-600"
         >
           {t('hero.cta')}

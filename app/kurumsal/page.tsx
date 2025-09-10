@@ -141,7 +141,7 @@ export default function Corporate() {
             {/* Logo / Visual */}
             <div className="from-left flex justify-center">
               <img
-                src="/havacilaregitim.png"
+                src="/havacilarlogoyazili.png"
                 alt="Havacılar Logo"
                 className="w-full max-w-[420px] object-contain drop-shadow-sm"
               />

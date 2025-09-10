@@ -41,9 +41,9 @@ export default function Footer() {
               <a href={social.facebook || '#'} target="_blank" rel="noreferrer" className="text-gray-300 hover:text-corporate-blue transition-colors" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href={social.twitter || '#'} target="_blank" rel="noreferrer" className="text-gray-300 hover:text-corporate-blue transition-colors" aria-label="Twitter">
+              {/* <a href={social.twitter || '#'} target="_blank" rel="noreferrer" className="text-gray-300 hover:text-corporate-blue transition-colors" aria-label="Twitter">
                 <Twitter className="h-5 w-5" />
-              </a>
+              </a> */}
               <a href={social.linkedin || '#'} target="_blank" rel="noreferrer" className="text-gray-300 hover:text-corporate-blue transition-colors" aria-label="LinkedIn">
                 <LinkedIn className="h-5 w-5" />
               </a>
@@ -61,39 +61,15 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-6 font-montserrat">{t('footer.quicklinks')}</h3>
             <ul className="space-y-3">
               <li><Link href="/" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.home')}</Link></li>
-              <li><Link href="/corporate" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.corporate')}</Link></li>
-              <li><Link href="/projects/real-estate" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.projects.realestate')}</Link></li>
-              <li><Link href="/projects/aviation" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.projects.aviation')}</Link></li>
-              <li><Link href="/announcements" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.announcements')}</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.contact')}</Link></li>
+              <li><Link href="/kurumsal" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.corporate')}</Link></li>
+              <li><Link href="/projects/gayrimenkulyatirim" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.projects.realestate')}</Link></li>
+              <li><Link href="/projects/havacilikyatirim" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.projects.aviation')}</Link></li>
+              <li><Link href="/duyurular" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.announcements')}</Link></li>
+              <li><Link href="/iletisim" className="text-gray-300 hover:text-corporate-blue transition-colors">{t('nav.contact')}</Link></li>
             </ul>
           </div>
 
-          <div className="flex flex-col items-center text-center">
-            <h3 className="text-lg font-semibold mb-6 font-montserrat">{t('contact.title')}</h3>
-            <div className="space-y-3">
-              {contact.phone && (
-                <div className="flex items-center">
-                  <Phone className="h-4 w-4 mr-2 text-corporate-blue" />
-                  <span className="text-gray-300">{contact.phone}</span>
-                </div>
-              )}
-              {contact.email && (
-                <div className="flex items-center">
-                  <Mail className="h-4 w-4 mr-2 text-corporate-blue" />
-                  <span className="text-gray-300">{contact.email}</span>
-                </div>
-              )}
-              {contact.address && (
-                <div className="flex items-center">
-                  <MapPin className="h-4 w-4 mr-2 text-corporate-blue" />
-                  <span className="text-gray-300">{contact.address}</span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Working Hours */}
+          {/* Working Hours moved before Contact */}
           <div className="flex flex-col items-center text-center">
             <h3 className="text-lg font-semibold mb-6 font-montserrat">{t('footer.hours.title')}</h3>
             <div className="space-y-2 text-gray-300/90">
@@ -111,13 +87,78 @@ export default function Footer() {
               </div>
             </div>
           </div>
+
+          {/* Contact moved after Working Hours */}
+          <div className="flex flex-col items-center text-center">
+            <h3 className="text-lg font-semibold mb-6 font-montserrat">{t('contact.title')}</h3>
+            <div className="space-y-3">
+              {contact.phone && (
+                <div className="flex items-center">
+                  <Phone className="h-4 w-4 mr-2 text-corporate-blue" />
+                  <a
+                    href={`tel:${(contact.phone || '').replace(/\s/g, '')}`}
+                    className="text-gray-300 hover:text-corporate-blue transition-colors"
+                    aria-label="Call us"
+                  >
+                    {contact.phone}
+                  </a>
+                </div>
+              )}
+              {contact.email && (
+                <div className="flex items-center">
+                  <Mail className="h-4 w-4 mr-2 text-corporate-blue" />
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="text-gray-300 hover:text-corporate-blue transition-colors"
+                    aria-label="Email us"
+                  >
+                    {contact.email}
+                  </a>
+                </div>
+              )}
+              {contact.address && (
+                <div className="flex items-center">
+                  <MapPin className="h-4 w-4 mr-2 text-corporate-blue" />
+                  <span className="text-gray-300">{contact.address}</span>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-400 text-sm">
-            {t('footer.copyright')}
-          </p>
+          <a
+            href="https://www.bloomomedya.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block group"
+          >
+            <p className="footer-copy text-gray-400 text-sm">
+              {t('footer.copyright')}
+            </p>
+          </a>
+          <style jsx>{`
+            .footer-copy {
+              transition: transform 0.6s ease, color 0.3s ease, background-position 1.6s ease;
+            }
+            .group:hover .footer-copy {
+              color: transparent;
+              background-image: linear-gradient(90deg, #2563eb, #06b6d4, #0b2440);
+              -webkit-background-clip: text;
+              background-clip: text;
+              background-size: 200% 100%;
+              animation: gradient-sweep 1.8s ease forwards, slide-subtle 0.6s ease forwards;
+            }
+            @keyframes gradient-sweep {
+              0% { background-position: 0% 50%; }
+              100% { background-position: 100% 50%; }
+            }
+            @keyframes slide-subtle {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(6px); }
+            }
+          `}</style>
         </div>
       </div>
     </footer>

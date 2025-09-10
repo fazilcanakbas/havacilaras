@@ -18,31 +18,33 @@ interface SimpleProject {
 const underConstruction: SimpleProject[] = [
   {
     name: "L'AVENTURE",
-    slug: "shellwe-maldives",
-    imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure2.webp',
-    imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure.webp',
+    slug: "laventure-cyprus",
+    imageLogo: '/laventure 1.jpg',
+    imagePlain: '/laventure 2.jpg',
     location: 'Alanya',
     delivery: '2026'
   },
   {
-    name: 'ULTRAMARINE',
-    slug: "ultramarine",
-    imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine2.webp',
-    imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine.webp',
+    name: 'SHELLWE',
+    slug: "shellwe-maldives",
+    imageLogo: '/shellwe 1.jpg',
+    imagePlain: '/shellwe2.jpg',
     location: 'Alanya',
     delivery: '2026'
+  },
+    
+    {
+    name: 'GLORIES DELUXE KEMER',
+    slug: "glorious-deluxe-kemer",
+    imageLogo: '/gloruius 1.jpg',
+    imagePlain: '/gloruius 2.jpg',
+    location: 'Alanya',
+    delivery: '2025'
   }
 ];
 
 const onSale: SimpleProject[] = [
-  {
-    name: 'AQUAMARINE',
-    slug: "aquamarine",
-    imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine2.webp',
-    imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine.webp',
-    location: 'Alanya',
-    delivery: '2025'
-  }
+
 ];
 
 export default function RealEstateProjects() {
