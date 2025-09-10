@@ -321,7 +321,7 @@ const projectsData: Record<string, any> = {
   },
  "glorious-deluxe-kemer": {
     slug: "glorious-deluxe-kemer",
-    mainImage: "/kemerhero.jpg",
+    mainImage: "/glorius-bg.png",
     mainTitle: "Glorious Deluxe",
     highlightedText: "Kemer",
     plainText: "Antalya — Kemer. Doğayla iç içe, modern lüks villalar.",
@@ -656,7 +656,7 @@ export default function ProjectDetailPage() {
       <Header />
 
       {/* HERO */}
-      <header className="relative h-[72vh] md:h-[78vh]">
+  <header className="relative h-[72vh] md:h-[78vh] pt-6 md:pt-0">
         <Image
           src={project.mainImage}
           alt={project.mainTitle}
@@ -676,14 +676,14 @@ export default function ProjectDetailPage() {
               initial={{ y: 18, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="grid md:grid-cols-2 gap-8 items-center"
+              className="grid md:grid-cols-2 gap-4 md:gap-8 items-center mt-8 md:mt-0"
             >
               <div>
 <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
       {project.mainTitle}{" "}
-        <motion.span
-        className="text-transparent bg-clip-text bg-gradient-to-r 
-                   from-[#0b2a57] via-[#1c3d8a] to-[#2a5bb0]"
+  <motion.span
+  className="text-transparent bg-clip-text bg-gradient-to-r 
+       from-[#93c5fd] via-[#60a5fa] to-[#22d3ee] drop-shadow-md"
         variants={container}
         initial="hidden"
         animate="visible"
@@ -699,7 +699,7 @@ export default function ProjectDetailPage() {
 
 
 
-                <p className="mt-4 text-slate-100 max-w-xl text-lg md:text-xl">
+                <p className="mt-6 md:mt-4 text-slate-100 max-w-xl text-lg md:text-xl">
                   {language === 'en' ? project.plainTextEn : project.plainText}
                 </p>
         <div className="mt-6 flex flex-wrap gap-3">
