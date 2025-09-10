@@ -7,21 +7,28 @@ import { MapPin, Calendar } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 // Construction / On-Sale project sets (example; adapt as needed)
-interface SimpleProject { name: string; imageLogo?: string; imagePlain?: string; href: string; location?: string; delivery?: string; }
+interface SimpleProject { 
+  name: string; 
+  slug: string;
+  imageLogo?: string; 
+  imagePlain?: string; 
+  location?: string; 
+  delivery?: string; 
+}
 const underConstruction: SimpleProject[] = [
   {
     name: "L'AVENTURE",
+    slug: "shellwe-maldives",
     imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure2.webp',
     imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure.webp',
-    href: '#',
     location: 'Alanya',
     delivery: '2026'
   },
   {
     name: 'ULTRAMARINE',
+    slug: "ultramarine",
     imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine2.webp',
     imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine.webp',
-    href: '#',
     location: 'Alanya',
     delivery: '2026'
   }
@@ -30,9 +37,9 @@ const underConstruction: SimpleProject[] = [
 const onSale: SimpleProject[] = [
   {
     name: 'AQUAMARINE',
+    slug: "aquamarine",
     imageLogo: 'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine2.webp',
     imagePlain: 'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine.webp',
-    href: '#',
     location: 'Alanya',
     delivery: '2025'
   }
@@ -135,7 +142,10 @@ export default function RealEstateProjects() {
             <TabsContent value="construction" className="mt-10">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {underConstruction.map((p) => (
-                  <a key={p.name} href={p.href} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-black aspect-[5/5] sm:aspect-[5/4]">
+                  <a key={p.name} 
+                  
+                  href={`/projects/gayrimenkulyatirim/${p.slug}`} 
+                  className="group relative block overflow-hidden rounded-2xl shadow-lg bg-black aspect-[5/5] sm:aspect-[5/4]">
                     {p.imagePlain ? <img src={p.imagePlain} alt={`${p.name} arka plan`} className="absolute inset-0 h-full w-full object-cover" /> : <div className="absolute inset-0 bg-gradient-to-br from-corporate-blue/20 to-corporate-navy/30" />}
                     {p.imageLogo ? (
                       <img src={p.imageLogo} alt={p.name} className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0" />
@@ -151,7 +161,8 @@ export default function RealEstateProjects() {
             <TabsContent value="onsale" className="mt-10">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {onSale.map((p) => (
-                  <a key={p.name} href={p.href} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-black aspect-[5/5] sm:aspect-[5/4]">
+                  <a key={p.name} 
+                  href={`/projects/gayrimenkulyatirim/${p.slug}`} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-black aspect-[5/5] sm:aspect-[5/4]">
                     {p.imagePlain ? <img src={p.imagePlain} alt={`${p.name} arka plan`} className="absolute inset-0 h-full w-full object-cover" /> : <div className="absolute inset-0 bg-gradient-to-br from-corporate-blue/20 to-corporate-navy/30" />}
                     {p.imageLogo ? (
                       <img src={p.imageLogo} alt={p.name} className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out group-hover:opacity-0" />

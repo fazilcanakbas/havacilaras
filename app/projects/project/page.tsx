@@ -39,7 +39,15 @@ export default function ProjectDetailPage() {
           className="object-cover brightness-75"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#07172e]/90 flex items-center">
+         <div className="absolute inset-0">
+    {/* Üst kısım: header arkasında koyu */}
+    <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#07172e]/95 to-transparent" />
+
+    {/* Alt kısım: daha hafif opaklık */}
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#07172e]/40 to-[#07172e]/80" />
+  </div>
+          <div className="absolute inset-0 flex items-center">
+
           <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-20">
             <motion.div
               initial={{ y: 18, opacity: 0 }}
@@ -72,16 +80,16 @@ export default function ProjectDetailPage() {
                 </div>
               </div>
 
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/5">
+              <div className="relative rounded-2xl overflow-hidden">
                 <div className="h-64 md:h-72 lg:h-80 w-full">
                   <Image
-                    src="/Resim2.png"
+                    src="/maldiveslogopng.png"
                     alt="Shellwe render"
                     fill
                     className="object-cover"
                   />
                 </div>
-                <div className="p-4 bg-gradient-to-t from-[#07172e]/60 to-transparent">
+                {/* <div className="p-4 bg-gradient-to-t from-[#07172e]/60 to-transparent">
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="text-xs text-slate-300">Proje Tipi</div>
@@ -94,7 +102,7 @@ export default function ProjectDetailPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           </div>

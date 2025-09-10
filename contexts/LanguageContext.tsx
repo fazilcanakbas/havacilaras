@@ -118,6 +118,16 @@ const translations = {
     'footer.hours.sunday': 'Pazar',
     'footer.hours.closed': 'Kapalı',
     'footer.copyright': '© 2025 Havacılar Yatırım. Tüm hakları saklıdır.',
+    
+  // Project detail
+  'project.overview': 'Proje Özeti',
+  'project.models': 'Konut Modelleri',
+  'project.advantages': 'Proje Avantajları',
+  'project.gallery': 'Galeri',
+  'project.financial': 'Finansal Projeksiyon',
+  'project.contact.title': 'Bilgi & Teklif Talebi',
+  'project.cta.offer': 'Teklif Al',
+  'project.cta.gallery': 'Galeri Gör',
   },
   en: {
     // Header
@@ -225,6 +235,16 @@ const translations = {
     'footer.hours.sunday': 'Sunday',
     'footer.hours.closed': 'Closed',
     'footer.copyright': '© 2025 Havacılar Investment. All rights reserved.',
+    
+  // Project detail
+  'project.overview': 'Project Overview',
+  'project.models': 'Residence Models',
+  'project.advantages': 'Project Advantages',
+  'project.gallery': 'Gallery',
+  'project.financial': 'Financial Projection',
+  'project.contact.title': 'Information & Quote Request',
+  'project.cta.offer': 'Get an Offer',
+  'project.cta.gallery': 'View Gallery',
   },
 };
 

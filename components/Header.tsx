@@ -44,7 +44,7 @@ export default function Header() {
               {t('nav.home')}
             </Link>
             
-            <Link href="/corporate" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
+            <Link href="/kurumsal" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
               {t('nav.corporate')}
             </Link>
             
@@ -66,20 +66,20 @@ export default function Header() {
                 onMouseEnter={() => setIsProjectsOpen(true)}
                 onMouseLeave={() => setIsProjectsOpen(false)}
               >
-                <Link href="/projects/real-estate" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+                <Link href="/projects/gayrimenkulyatirim" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
                   {t('nav.projects.realestate')}
                 </Link>
-                <Link href="/projects/aviation" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+                <Link href="/projects/havacilikyatirim" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
                   {t('nav.projects.aviation')}
                 </Link>
               </div>
             </div>
-            
-            <Link href="/announcements" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
+
+            <Link href="/duyurular" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
               {t('nav.announcements')}
             </Link>
-            
-            <Link href="/contact" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
+
+            <Link href="/iletisim" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
               {t('nav.contact')}
             </Link>
 
