@@ -91,32 +91,30 @@ export default function Home() {
 
   // Gayrimenkul Yatırım Projeleri
   const realEstateProjects = [
-   
-  {
-    name: "L'AVENTURE",
-    slug: "laventure-cyprus",
-    imageLogo: '/laventure 1.jpg',
-    imagePlain: '/laventure 2.jpg',
-    location: 'Alanya',
-    delivery: '2026'
-  },
-  {
-    name: 'SHELLWE',
-    slug: "shellwe-maldives",
-    imageLogo: '/shellwe 1.jpg',
-    imagePlain: '/shellwe2.jpg',
-    location: 'Alanya',
-    delivery: '2026'
-  },
-    
     {
-    name: 'GLORIES DELUXE KEMER',
-    slug: "glorious-deluxe-kemer",
-    imageLogo: '/gloruius 1.jpg',
-    imagePlain: '/gloruius 2.jpg',
-    location: 'Alanya',
-    delivery: '2025'
-  }
+      name: "L'AVENTURE",
+      slug: "laventure-cyprus",
+      imageLogo: '/laventure-1.png',
+      imagePlain: '/laventure2.jpg',
+      location: 'Alanya',
+      delivery: '2026'
+    },
+    {
+      name: 'SHELLWE',
+      slug: "shellwe-maldives",
+      imageLogo: '/maldiveslogopng.png',
+      imagePlain: '/model-iglo.jpg',
+      location: 'Alanya',
+      delivery: '2026'
+    },
+    {
+      name: 'GLORIOUS DELUXE KEMER',
+      slug: "glorious-deluxe-kemer",
+      imageLogo: '/kemerlogo.png',
+      imagePlain: '/kemerhero.jpg',
+      location: 'Antalya',
+      delivery: '2025'
+    }
     // {
     //   name: 'MY HOUSE Elegant',
     //   imageLogo:
@@ -479,7 +477,7 @@ export default function Home() {
                   <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
                     <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 supports-[backdrop-filter]:bg-white/60 backdrop-blur border border-white/70 shadow-sm">
                       <span className="inline-flex h-5 w-5 items-center justify-center rounded-full text-white text-[10px] font-bold">
-                        <img src='havacilaregitim.png'/>
+                        <img src='/havacilaregitim.png'/>
 
                       </span>
                       <span className="text-xs font-medium text-corporate-navy">Havacılar A.Ş.</span>
