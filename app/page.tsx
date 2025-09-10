@@ -46,16 +46,16 @@ export default function Home() {
   // Instagram mock grid (3 postluk, görsel + link)
   const mockInstagram = [
     {
-      href: 'https://www.instagram.com/',
+      href: 'https://www.instagram.com/havacilaras',
       image:
         '/instagram1.jpg',
     },
     {
-      href: 'https://www.instagram.com/',
+      href: 'https://www.instagram.com/havacilaras',
       image: '/instagram2.jpg',
     },
     {
-      href: 'https://www.instagram.com/',
+      href: 'https://www.instagram.com/havacilaras',
       image: '/instagram3.jpg',
     },
   ];
@@ -97,7 +97,7 @@ export default function Home() {
         'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure2.webp',
       imagePlain:
         'https://aderansconstruction.com/wp-content/uploads/2025/02/laventure.webp',
-      href: '/projects/real-estate',
+      href: '/projects/gayrimenkulyatirim/laventure-cyprus',
     },
     {
       name: 'AQUAMARINE',
@@ -105,7 +105,7 @@ export default function Home() {
         'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine2.webp',
       imagePlain:
         'https://aderansconstruction.com/wp-content/uploads/2025/02/aquamarine.webp',
-      href: '/projects/real-estate',
+      href: '/projects/gayrimenkulyatirim/aquamarine-cyprus',
     },
     {
       name: 'ULTRAMARINE',
@@ -113,7 +113,7 @@ export default function Home() {
         'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine2.webp',
       imagePlain:
         'https://aderansconstruction.com/wp-content/uploads/2025/02/ultramarine.webp',
-      href: '/projects/real-estate',
+      href: '/projects/gayrimenkulyatirim/shellwe',
      },
     // {
     //   name: 'MY HOUSE Elegant',
@@ -145,15 +145,15 @@ export default function Home() {
   const aviationProjects = [
     {
       name: 'Flight Training Center',
-      href: '/projects/aviation',
+      href: '/projects/havacilikyatirim',
     },
     {
       name: 'MRO Hangar Expansion',
-      href: '/projects/aviation',
+      href: '/projects/havacilikyatirim',
     },
     {
       name: 'Airport Services JV',
-      href: '/projects/aviation',
+      href: '/projects/havacilikyatirim',
     },
   ];
 
@@ -279,17 +279,19 @@ export default function Home() {
           </h2>
 
           <Tabs defaultValue="real-estate" className="w-full">
-            <div className="flex justify-center">
-              <TabsList className="bg-white border border-gray-200 rounded-full p-1">
+            <div className="flex justify-center px-4 md:px-0">
+              <TabsList
+                className="bg-white border border-gray-200 rounded-full p-1 w-full max-w-lg md:w-auto md:max-w-none flex gap-1 overflow-hidden"
+              >
                 <TabsTrigger
                   value="real-estate"
-                  className="rounded-full px-4 py-2 text-sm font-semibold data-[state=active]:bg-corporate-blue data-[state=active]:text-white data-[state=active]:shadow-sm"
+                  className="rounded-full px-3 py-2 md:px-4 md:py-2 text-xs md:text-sm font-semibold flex-1 md:flex-none text-center whitespace-normal leading-snug data-[state=active]:bg-corporate-blue data-[state=active]:text-white data-[state=active]:shadow-sm"
                 >
                   {t('projects.realestate')}
                 </TabsTrigger>
                 <TabsTrigger
                   value="aviation"
-                  className="rounded-full px-4 py-2 text-sm font-semibold data-[state=active]:bg-corporate-blue data-[state=active]:text-white data-[state=active]:shadow-sm"
+                  className="rounded-full px-3 py-2 md:px-4 md:py-2 text-xs md:text-sm font-semibold flex-1 md:flex-none text-center whitespace-normal leading-snug data-[state=active]:bg-corporate-blue data-[state=active]:text-white data-[state=active]:shadow-sm"
                 >
                   {t('projects.aviation')}
                 </TabsTrigger>
@@ -376,7 +378,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy">
               {t('home.announcements.title')}
             </h2>
-            <a href="/announcements" className="text-corporate-blue hover:underline font-medium">
+            <a href="/duyurular" className="text-corporate-blue hover:underline font-medium">
               {t('home.announcements.all')} →
             </a>
           </div>
@@ -385,7 +387,7 @@ export default function Home() {
               const title = a.title?.[language] || a.title?.tr || '';
               const desc = a.description?.[language] || a.description?.tr || '';
               return (
-                <a key={a.id} href={`/announcements`} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-white">
+                <a key={a.id} href={`/duyurular/${a.slug || a.id}`} className="group relative block overflow-hidden rounded-2xl shadow-lg bg-white">
                   <img src={a.image} alt={title || 'announcement'} className="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="p-5">
                     <div className="text-xs text-corporate-blue font-semibold mb-1">{formatDate(a.date)}</div>
@@ -446,25 +448,25 @@ export default function Home() {
               Havacılar A.Ş.
             </span>
             <h2 className="mt-4 text-3xl md:text-4xl font-bold font-montserrat text-corporate-navy">
-              Bizi Takip Edin
+              {t('home.follow.title')}
             </h2>
-            <p className="text-lg text-corporate-text mt-2">Havacılar A.Ş. sosyal medya hesapları</p>
+            <p className="text-lg text-corporate-text mt-2">{t('home.follow.subtitle')}</p>
             <div className="mt-6 flex items-center justify-center gap-3">
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/havacilaras"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white font-semibold shadow-lg hover:opacity-90 transition focus:outline-none focus:ring-2 focus:ring-pink-300"
               >
-                <InstagramIcon className="h-5 w-5" /> Instagram
+                <InstagramIcon className="h-5 w-5" /> {t('home.follow.instagram')}
               </a>
               <a
-                href="https://www.linkedin.com/"
+                href="https://www.linkedin.com/company/havacilar/?originalSubdomain=tr"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-corporate-navy border border-gray-200 font-semibold shadow-sm hover:bg-gray-50 transition focus:outline-none focus:ring-2 focus:ring-blue-300"
               >
-                <Linkedin className="h-5 w-5 text-blue-600" /> LinkedIn
+                <Linkedin className="h-5 w-5 text-blue-600" /> {t('home.follow.linkedin')}
               </a>
             </div>
           </div>
@@ -509,7 +511,7 @@ export default function Home() {
                       <div className="text-[11px] opacity-85">#yatirim #proje</div> */}
                     </div>
                     <span className="text-xs font-semibold text-corporate-navy bg-white px-3 py-1.5 rounded-full shadow opacity-90">
-                      Görüntüle
+                      {t('home.follow.view')}
                     </span>
                   </div>
                 </div>
@@ -588,7 +590,7 @@ export default function Home() {
       <section className="py-16 fade-in-section bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold font-montserrat text-corporate-navy mb-8 text-center">
-            Yan Kuruluşlarımız
+            {t('home.subsidiaries.title')}
           </h2>
           <div className="flex flex-wrap justify-center gap-6">
             {subsidiaries.map((s: Subsidiary, i: number) => {
@@ -616,45 +618,45 @@ export default function Home() {
                       <div className="text-sm font-semibold text-corporate-navy">{s.name}</div>
                     </div>
                     <div className="mt-2 flex items-center justify-center gap-3">
-                      {s.website && (
+            {s.website && (
                         <a
                           href={s.website}
                           target="_blank"
                           rel="noreferrer"
-                          title="Web sitesi"
+              title={t('home.subsidiaries.website')}
                           className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-corporate-navy hover:bg-gray-50 hover:border-corporate-blue/40 shadow-sm transition"
                         >
                           <Globe2 className="h-4.5 w-4.5" />
                         </a>
                       )}
-                      {s.instagram && (
+            {s.instagram && (
                         <a
                           href={s.instagram}
                           target="_blank"
                           rel="noreferrer"
-                          title="Instagram"
+              title={t('home.subsidiaries.instagram')}
                           className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-corporate-navy hover:bg-gray-50 hover:border-corporate-blue/40 shadow-sm transition"
                         >
                           <InstagramIcon className="h-4.5 w-4.5" />
                         </a>
                       )}
-                      {s.youtube && (
+            {s.youtube && (
                         <a
                           href={s.youtube}
                           target="_blank"
                           rel="noreferrer"
-                          title="YouTube"
+              title={t('home.subsidiaries.youtube')}
                           className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-corporate-navy hover:bg-gray-50 hover:border-corporate-blue/40 shadow-sm transition"
                         >
                           <Youtube className="h-4.5 w-4.5" />
                         </a>
                       )}
-                      {s.linkedin && (
+            {s.linkedin && (
                         <a
                           href={s.linkedin}
                           target="_blank"
                           rel="noreferrer"
-                          title="LinkedIn"
+              title={t('home.subsidiaries.linkedin')}
                           className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-corporate-navy hover:bg-gray-50 hover:border-corporate-blue/40 shadow-sm transition"
                         >
                           <Linkedin className="h-4.5 w-4.5" />

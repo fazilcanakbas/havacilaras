@@ -20,6 +20,11 @@ export default function AdminLogin() {
       const success = login(username, password);
       if (!success) {
         setError('Kullanıcı adı veya şifre hatalı');
+      } else {
+        try {
+          // persist a demo token for API auth
+          localStorage.setItem('admin_token', 'demo-admin-token');
+        } catch {}
       }
       setIsLoading(false);
     }, 1000);

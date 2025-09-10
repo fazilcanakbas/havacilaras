@@ -79,16 +79,27 @@ export default function Contact() {
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-navy-gradient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-6 animate-fade-in-up">
-            {t('contact.title')}
-          </h1>
-          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-            Projelerimiz hakkında detaylı bilgi almak ve görüşmek için bizimle iletişime geçin.
-          </p>
-          <div className="w-24 h-1 bg-corporate-blue mx-auto"></div>
+      {/* Hero Section (like Corporate) */}
+      <section className="relative z-0">
+        <div className="relative h-[240px] sm:h-[300px] md:h-[380px] w-full overflow-hidden">
+          <div
+            className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: "url('/bg.jpg')" }}
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+          <div className="relative z-10 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-4 drop-shadow">
+                  {t('contact.title')}
+                </h1>
+                <p className="text-white/90 text-base md:text-lg max-w-3xl mx-auto leading-relaxed drop-shadow">
+                  Projelerimiz hakkında detaylı bilgi almak ve görüşmek için bizimle iletişime geçin.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -100,17 +111,17 @@ export default function Contact() {
             {/* Contact Form */}
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
               <h2 className="text-2xl font-bold font-montserrat text-corporate-navy mb-6">
-                Bizimle İletişime Geçin
+                {t('contact.form.title')}
               </h2>
               
               {isSubmitted ? (
                 <div className="text-center py-8">
                   <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
                   <h3 className="text-xl font-semibold text-green-600 mb-2">
-                    Mesajınız Gönderildi!
+                    {t('contact.form.success.title')}
                   </h3>
                   <p className="text-gray-600">
-                    En kısa sürede size geri dönüş yapacağız.
+                    {t('contact.form.success.desc')}
                   </p>
                 </div>
               ) : (
@@ -128,7 +139,7 @@ export default function Contact() {
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all duration-300"
-                        placeholder="Adınız ve soyadınız"
+                        placeholder={t('contact.form.name.placeholder')}
                       />
                     </div>
                     
@@ -144,7 +155,7 @@ export default function Contact() {
                         onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all duration-300"
-                        placeholder="email@ornek.com"
+                        placeholder={t('contact.form.email.placeholder')}
                       />
                     </div>
                   </div>
@@ -152,7 +163,7 @@ export default function Contact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Telefon
+                        {t('contact.form.phone')}
                       </label>
                       <input
                         type="tel"
@@ -161,13 +172,13 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all duration-300"
-                        placeholder="+90 555 123 45 67"
+                        placeholder={t('contact.form.phone.placeholder')}
                       />
                     </div>
                     
                     <div>
                       <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
-                        Konu *
+                        {t('contact.form.subject')} *
                       </label>
                       <select
                         id="subject"
@@ -177,12 +188,12 @@ export default function Contact() {
                         required
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all duration-300"
                       >
-                        <option value="">Konu seçiniz</option>
-                        <option value="real-estate">Gayrimenkul Projeleri</option>
-                        <option value="aviation">Havacılık Projeleri</option>
-                        <option value="investment">Yatırım Danışmanlığı</option>
-                        <option value="partnership">İş Ortaklığı</option>
-                        <option value="other">Diğer</option>
+                        <option value="">{t('contact.form.subject.placeholder')}</option>
+                        <option value="real-estate">{t('contact.subject.realestate')}</option>
+                        <option value="aviation">{t('contact.subject.aviation')}</option>
+                        <option value="investment">{t('contact.subject.investment')}</option>
+                        <option value="partnership">{t('contact.subject.partnership')}</option>
+                        <option value="other">{t('contact.subject.other')}</option>
                       </select>
                     </div>
                   </div>
@@ -199,7 +210,7 @@ export default function Contact() {
                       required
                       rows={6}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-corporate-blue focus:border-transparent outline-none transition-all duration-300 resize-vertical"
-                      placeholder="Mesajınızı buraya yazın..."
+                      placeholder={t('contact.form.message.placeholder')}
                     ></textarea>
                   </div>
 
@@ -213,7 +224,7 @@ export default function Contact() {
                     ) : (
                       <Send className="h-5 w-5 mr-2" />
                     )}
-                    {isSubmitting ? 'Gönderiliyor...' : t('contact.form.submit')}
+                    {isSubmitting ? t('contact.form.submitting') : t('contact.form.submit')}
                   </button>
                 </form>
               )}
@@ -223,7 +234,7 @@ export default function Contact() {
             <div className="space-y-8">
               <div className="bg-corporate-navy rounded-2xl p-8 text-white">
                 <h2 className="text-2xl font-bold font-montserrat mb-6">
-                  İletişim Bilgileri
+                  {t('contact.info.title')}
                 </h2>
                 
                 <div className="space-y-6">
@@ -232,7 +243,7 @@ export default function Contact() {
                       <Phone className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">Telefon</h3>
+                      <h3 className="font-semibold mb-1">{t('contact.phone')}</h3>
                       <p className="text-white/80">+90 242 000 00 00</p>
                       <p className="text-white/80">+90 535 000 00 00</p>
                     </div>
@@ -243,7 +254,7 @@ export default function Contact() {
                       <Mail className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">E-posta</h3>
+                      <h3 className="font-semibold mb-1">{t('contact.email')}</h3>
                       <p className="text-white/80">info@havacilar.com</p>
                       <p className="text-white/80">yatirim@havacilar.com</p>
                     </div>
@@ -254,7 +265,7 @@ export default function Contact() {
                       <MapPin className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-semibold mb-1">Adres</h3>
+                      <h3 className="font-semibold mb-1">{t('contact.address')}</h3>
                       <p className="text-white/80">
                         Konyaaltı Mahallesi<br />
                         Atatürk Caddesi No: 123<br />
@@ -282,22 +293,22 @@ export default function Contact() {
               {/* Quick Links */}
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
                 <h3 className="text-xl font-bold font-montserrat text-corporate-navy mb-6">
-                  Hızlı Erişim
+                  {t('contact.quicklinks.title')}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <a href="/projects/real-estate" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
+                  <a href="/projects/gayrimenkulyatirim" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
                     <span className="w-2 h-2 bg-corporate-blue rounded-full mr-3"></span>
                     Gayrimenkul Projeleri
                   </a>
-                  <a href="/projects/aviation" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
+                  <a href="/projects/havacilikyatirim" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
                     <span className="w-2 h-2 bg-corporate-blue rounded-full mr-3"></span>
                     Havacılık Projeleri
                   </a>
-                  <a href="/announcements" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
+                  <a href="/duyurular" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
                     <span className="w-2 h-2 bg-corporate-blue rounded-full mr-3"></span>
                     Güncel Duyurular
                   </a>
-                  <a href="/corporate" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
+                  <a href="/kurumsal" className="flex items-center text-corporate-blue hover:text-corporate-navy transition-colors">
                     <span className="w-2 h-2 bg-corporate-blue rounded-full mr-3"></span>
                     Kurumsal Bilgiler
                   </a>

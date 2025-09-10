@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1757500697698,
+    "slug": "asasas",
+    "active": true,
+    "category": "real-estate",
+    "saleStatus": "ongoing",
+    "coverImage": "",
+    "coverImageWithLogo": "",
+    "location": "asasasa",
+    "date": "asasasa",
+    "title": {
+      "tr": "asasas",
+      "en": "asasasa"
+    },
+    "description": {
+      "tr": "asasaa",
+      "en": "sasasas"
+    },
+    "overview": {},
+    "models": [],
+    "experiences": [],
+    "financial": {},
+    "gallery": [],
+    "video": {},
+    "advantages": []
+  }
+]

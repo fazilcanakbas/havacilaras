@@ -59,28 +59,39 @@ export default function Announcements() {
 
   const getCategoryBadge = (category: string) => {
     const categoryConfig = {
-      aviation: { text: 'Havacılık', color: 'bg-blue-100 text-blue-800' },
-      'real-estate': { text: 'Gayrimenkul', color: 'bg-green-100 text-green-800' },
-      corporate: { text: 'Kurumsal', color: 'bg-purple-100 text-purple-800' }
-    };
-    
-    return categoryConfig[category as keyof typeof categoryConfig] || { text: 'Genel', color: 'bg-gray-100 text-gray-800' };
+      aviation: { key: 'category.aviation', color: 'bg-blue-100 text-blue-800' },
+      'real-estate': { key: 'category.realestate', color: 'bg-green-100 text-green-800' },
+      corporate: { key: 'category.corporate', color: 'bg-purple-100 text-purple-800' }
+    } as const;
+    const conf = (categoryConfig as any)[category] || { key: 'category.general', color: 'bg-gray-100 text-gray-800' };
+    return { text: t(conf.key), color: conf.color };
   };
 
   return (
     <div className="min-h-screen">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-navy-gradient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-6 animate-fade-in-up">
-            {t('nav.announcements')}
-          </h1>
-          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-            En güncel haberler ve duyurularımızı takip edin.
-          </p>
-          <div className="w-24 h-1 bg-corporate-blue mx-auto"></div>
+      {/* Hero Section (like Corporate) */}
+      <section className="relative z-0">
+        <div className="relative h-[240px] sm:h-[300px] md:h-[380px] w-full overflow-hidden">
+          <div
+            className="absolute inset-0 bg-center bg-cover"
+            style={{ backgroundImage: "url('/bg.jpg')" }}
+            aria-hidden="true"
+          />
+          <div className="absolute inset-0 bg-black/60 pointer-events-none" />
+          <div className="relative z-10 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold font-montserrat text-white mb-4 drop-shadow">
+                  {t('nav.announcements')}
+                </h1>
+                <p className="text-white/90 text-base md:text-lg max-w-3xl mx-auto leading-relaxed drop-shadow">
+                  {t('announcements.hero.subtitle')}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -96,7 +107,7 @@ export default function Announcements() {
                   : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
               }`}
             >
-              Tümü
+              {t('announcements.filter.all')}
             </button>
             <button
               onClick={() => setFilter('aviation')}
@@ -106,7 +117,7 @@ export default function Announcements() {
                   : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
               }`}
             >
-              Havacılık
+              {t('announcements.filter.aviation')}
             </button>
             <button
               onClick={() => setFilter('real-estate')}
@@ -116,7 +127,7 @@ export default function Announcements() {
                   : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
               }`}
             >
-              Gayrimenkul
+              {t('announcements.filter.realestate')}
             </button>
             <button
               onClick={() => setFilter('corporate')}
@@ -126,7 +137,7 @@ export default function Announcements() {
                   : 'bg-white text-corporate-navy hover:bg-corporate-navy hover:text-white'
               }`}
             >
-              Kurumsal
+              {t('announcements.filter.corporate')}
             </button>
           </div>
         </div>
@@ -156,7 +167,7 @@ export default function Announcements() {
                   </div>
                 </div>
                 
-                <div className="p-6">
+                <a href={`/duyurular/${(announcement as any).slug || announcement.id}`} className="block p-6 hover:bg-gray-50 transition-colors">
                   <div className="flex items-center text-sm text-gray-500 mb-3">
                     <Calendar className="h-4 w-4 mr-2" />
                     {formatDate(announcement.date)}
@@ -170,18 +181,18 @@ export default function Announcements() {
                     {announcement.description[language]}
                   </p>
                   
-                  <button className="text-corporate-blue hover:text-corporate-navy font-semibold transition-colors duration-300 group">
-                    Devamını Oku
+                  <span className="text-corporate-blue hover:text-corporate-navy font-semibold transition-colors duration-300 group inline-flex items-center">
+                    {t('announcements.readmore')}
                     <span className="inline-block ml-1 transform group-hover:translate-x-1 transition-transform duration-300">→</span>
-                  </button>
-                </div>
+                  </span>
+                </a>
               </article>
             ))}
           </div>
 
           {filteredAnnouncements.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">Bu kategoride henüz duyuru bulunmamaktadır.</p>
+              <p className="text-gray-500 text-lg">{t('announcements.empty')}</p>
             </div>
           )}
         </div>
@@ -191,23 +202,23 @@ export default function Announcements() {
       <section className="py-20 bg-corporate-navy fade-in-section">
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold font-montserrat text-white mb-6">
-            Haberlerimizi Kaçırmayın
+            {t('announcements.newsletter.title')}
           </h2>
           <p className="text-xl text-white/90 mb-8">
-            En güncel duyurularımızı e-posta ile almak için bültenimize abone olun.
+            {t('announcements.newsletter.desc')}
           </p>
           
           <form className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <input
               type="email"
-              placeholder="E-posta adresiniz"
+              placeholder={t('announcements.newsletter.placeholder')}
               className="flex-1 px-6 py-3 rounded-lg border-none focus:ring-2 focus:ring-corporate-blue outline-none"
             />
             <button
               type="submit"
               className="bg-corporate-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-corporate-light-blue transition-colors duration-300"
             >
-              Abone Ol
+              {t('announcements.newsletter.subscribe')}
             </button>
           </form>
         </div>

@@ -1,10 +1,11 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { MapPin, Calendar } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { listProjects } from "@/app/services/projects.service";
 
 // Aviation projects split into two groups similar to real-estate structure
 interface SimpleProject {
@@ -16,58 +17,36 @@ interface SimpleProject {
   delivery?: string;
 }
 
-// Ongoing / planned treated as under construction
-const underConstruction: SimpleProject[] = [
-  {
-    name: "Hangar Facilities",
-    imagePlain: "https://images.pexels.com/photos/912050/pexels-photo-912050.jpeg",
-    href: "#",
-    location: "İstanbul",
-    delivery: "2024",
-  },
-  {
-    name: "Cargo Terminal",
-    imagePlain: "https://images.pexels.com/photos/163792/model-planes-airplanes-aircraft-play-163792.jpeg",
-    href: "#",
-    location: "Antalya",
-    delivery: "2024",
-  },
-  {
-    name: "Training Campus",
-    imagePlain: "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg",
-    href: "#",
-    location: "Ankara",
-    delivery: "2025",
-  },
-];
-
-// Completed treated as on sale (placeholder mapping)
-const onSale: SimpleProject[] = [
-  {
-    name: "Flight Academy",
-    imagePlain: "https://images.pexels.com/photos/358220/pexels-photo-358220.jpeg",
-    href: "#",
-    location: "İzmir",
-    delivery: "2023",
-  },
-  {
-    name: "Aviation Museum",
-    imagePlain: "https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg",
-    href: "#",
-    location: "Eskişehir",
-    delivery: "2023",
-  },
-  {
-    name: "Private Jet Terminal",
-    imagePlain: "https://images.pexels.com/photos/2026324/pexels-photo-2026324.jpeg",
-    href: "#",
-    location: "Bodrum",
-    delivery: "2025",
-  },
-];
+const useAviationProjects = () => {
+  const [construction, setConstruction] = useState<SimpleProject[]>([]);
+  const [onSale, setOnSale] = useState<SimpleProject[]>([]);
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const items = await listProjects();
+        const aviation = (items || []).filter((p: any) => p.category === 'aviation' && p.active !== false);
+        const toSimple = (p: any): SimpleProject => ({
+          name: p.title?.tr || p.title?.en || p.slug,
+          imageLogo: p.coverImageWithLogo,
+          imagePlain: p.coverImage,
+          href: `/projects/havacilikyatirim/${p.slug}`,
+          location: p.location,
+          delivery: p.date,
+        });
+        const cons = aviation.filter((p: any) => p.saleStatus === 'ongoing').map(toSimple);
+        const sale = aviation.filter((p: any) => p.saleStatus === 'completed').map(toSimple);
+        if (mounted) { setConstruction(cons); setOnSale(sale); }
+      } catch {}
+    })();
+    return () => { mounted = false; };
+  }, []);
+  return { construction, onSale };
+};
 
 export default function AviationProjects() {
   const { t } = useLanguage();
+  const { construction, onSale } = useAviationProjects();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -143,7 +122,7 @@ export default function AviationProjects() {
             </div>
             <TabsContent value="construction" className="mt-10">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {underConstruction.map((p) => (
+                {construction.map((p) => (
                   <a
                     key={p.name}
                     href={p.href}

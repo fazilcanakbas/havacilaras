@@ -2,6 +2,7 @@
   "announcements": [
     {
       "id": 1,
+      "slug": "yeni-havacilik-projesi-duyurusu",
       "title": {
         "tr": "Yeni Havacılık Projesi Duyurusu",
         "en": "New Aviation Project Announcement"
@@ -10,12 +11,25 @@
         "tr": "İstanbul'da yeni hangar tesisimiz için yapım çalışmaları başladı.",
         "en": "Construction work has started for our new hangar facility in Istanbul."
       },
+      "content": {
+        "tr": [
+          "İstanbul Havalimanı bölgesinde planlanan yeni hangar tesisimizin temel atma çalışmaları başlamıştır.",
+          "Tesis, sürdürülebilirlik ilkeleri doğrultusunda modern altyapı ve enerji verimliliği çözümleri ile inşa edilecektir.",
+          "Projenin 2025 yılının üçüncü çeyreğinde tamamlanması hedeflenmektedir."
+        ],
+        "en": [
+          "Groundbreaking works have started for our new hangar facility planned in the Istanbul Airport region.",
+          "The facility will be built with modern infrastructure and energy efficiency solutions in line with sustainability principles.",
+          "The project is targeted to be completed in the third quarter of 2025."
+        ]
+      },
       "date": "2024-01-15",
       "image": "https://images.pexels.com/photos/912050/pexels-photo-912050.jpeg",
       "category": "aviation"
     },
     {
       "id": 2,
+      "slug": "gayrimenkul-yatirim-firsati",
       "title": {
         "tr": "Gayrimenkul Yatırım Fırsatı",
         "en": "Real Estate Investment Opportunity"
@@ -24,12 +38,25 @@
         "tr": "Antalya Marina Residences projesi için erken rezervasyon kampanyası başladı.",
         "en": "Early reservation campaign started for Antalya Marina Residences project."
       },
+      "content": {
+        "tr": [
+          "Antalya Marina Residences projemizde sınırlı sayıda daire için erken rezervasyon avantajları sunuyoruz.",
+          "Proje, denize yürüme mesafesinde, sosyal alanlar ve modern mimari ile dikkat çekmektedir.",
+          "Detaylı bilgi için satış ofisimizle iletişime geçebilirsiniz."
+        ],
+        "en": [
+          "We offer early reservation advantages for a limited number of apartments in our Antalya Marina Residences project.",
+          "The project stands out with modern architecture, social areas, and walking distance to the sea.",
+          "For detailed information, please contact our sales office."
+        ]
+      },
       "date": "2024-01-10",
       "image": "https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg",
       "category": "real-estate"
     },
     {
       "id": 3,
+      "slug": "stratejik-ortaklik-anlasmasi",
       "title": {
         "tr": "Stratejik Ortaklık Anlaşması",
         "en": "Strategic Partnership Agreement"
@@ -38,12 +65,23 @@
         "tr": "Uluslararası havacılık şirketi ile stratejik ortaklık anlaşması imzalandı.",
         "en": "Strategic partnership agreement signed with international aviation company."
       },
+      "content": {
+        "tr": [
+          "Uluslararası bir havacılık şirketi ile teknolojik iş birliklerini kapsayan stratejik ortaklık anlaşması imzaladık.",
+          "Bu anlaşma ile bakım-onarım ve eğitim faaliyetlerinde ortak projeler geliştirilecektir."
+        ],
+        "en": [
+          "We signed a strategic partnership agreement with an international aviation company covering technological collaborations.",
+          "With this agreement, joint projects will be developed in maintenance, repair, and training activities."
+        ]
+      },
       "date": "2024-01-05",
       "image": "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg",
       "category": "corporate"
     },
     {
       "id": 4,
+      "slug": "surdurulebilirlik-projesi",
       "title": {
         "tr": "Sürdürülebilirlik Projesi",
         "en": "Sustainability Project"
@@ -52,12 +90,23 @@
         "tr": "Green Valley projemiz çevre dostu inşaat sertifikası aldı.",
         "en": "Our Green Valley project received environmental friendly construction certificate."
       },
+      "content": {
+        "tr": [
+          "Green Valley projemiz, çevreye duyarlı malzemeler ve enerji verimli sistemler ile inşa edilmektedir.",
+          "Proje, uluslararası yeşil bina sertifikasına layık görülmüştür."
+        ],
+        "en": [
+          "Our Green Valley project is being built with eco-friendly materials and energy-efficient systems.",
+          "The project has been awarded an international green building certificate."
+        ]
+      },
       "date": "2023-12-28",
       "image": "https://images.pexels.com/photos/87223/pexels-photo-87223.jpeg",
       "category": "real-estate"
     },
     {
       "id": 5,
+      "slug": "egitim-merkezi-acilisi",
       "title": {
         "tr": "Eğitim Merkezi Açılışı",
         "en": "Training Center Opening"
@@ -66,12 +115,23 @@
         "tr": "Ankara'daki havacılık eğitim merkezimiz hizmete girdi.",
         "en": "Our aviation training center in Ankara started service."
       },
+      "content": {
+        "tr": [
+          "Ankara'da bulunan havacılık eğitim merkezimiz modern simülatörler ve sınıflar ile faaliyete geçmiştir.",
+          "Merkezimiz, sektöre nitelikli insan kaynağı kazandırmayı hedeflemektedir."
+        ],
+        "en": [
+          "Our aviation training center in Ankara has become operational with modern simulators and classrooms.",
+          "Our center aims to provide qualified human resources to the sector."
+        ]
+      },
       "date": "2023-12-20",
       "image": "https://images.pexels.com/photos/358220/pexels-photo-358220.jpeg",
       "category": "aviation"
     },
     {
       "id": 6,
+      "slug": "yil-sonu-degerlendirmesi",
       "title": {
         "tr": "Yıl Sonu Değerlendirmesi",
         "en": "Year-End Evaluation"
@@ -79,6 +139,16 @@
       "description": {
         "tr": "2023 yılında gerçekleştirdiğimiz projeler ve 2024 hedefleri.",
         "en": "Projects we completed in 2023 and our 2024 goals."
+      },
+      "content": {
+        "tr": [
+          "2023 yılında tamamlanan projelerimizi ve 2024 yılı için hedeflerimizi kamuoyu ile paylaştık.",
+          "Yeni dönemde sürdürülebilirlik ve teknoloji odaklı yatırımlara ağırlık vereceğiz."
+        ],
+        "en": [
+          "We shared our completed projects in 2023 and our goals for 2024 with the public.",
+          "In the new term, we will focus on sustainability and technology-oriented investments."
+        ]
       },
       "date": "2023-12-15",
       "image": "https://images.pexels.com/photos/439227/pexels-photo-439227.jpeg",

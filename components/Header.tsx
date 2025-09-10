@@ -77,6 +77,10 @@ export default function Header() {
 
             <Link href="/duyurular" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
               {t('nav.announcements')}
+
+            </Link>
+              <Link href="/blog" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
+              {t('nav.blog')}
             </Link>
 
             <Link href="/iletisim" className="nav-link relative text-white hover:text-corporate-blue transition-colors duration-300 font-medium">
@@ -114,19 +118,22 @@ export default function Header() {
             <Link href="/" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
               {t('nav.home')}
             </Link>
-            <Link href="/corporate" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+            <Link href="/kurumsal" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
               {t('nav.corporate')}
             </Link>
-            <Link href="/projects/real-estate" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+            <Link href="/projects/gayrimenkulyatirim" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
               {t('nav.projects.realestate')}
             </Link>
-            <Link href="/projects/aviation" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+            <Link href="/projects/havacilikyatirim" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
               {t('nav.projects.aviation')}
             </Link>
-            <Link href="/announcements" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+            <Link href="/duyurlar" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
               {t('nav.announcements')}
             </Link>
-            <Link href="/contact" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+            <Link href="/blog" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
+              {t('nav.blog')}
+            </Link>
+            <Link href="/iletisim" className="block px-4 py-2 text-white hover:bg-corporate-blue transition-colors">
               {t('nav.contact')}
             </Link>
             <button 

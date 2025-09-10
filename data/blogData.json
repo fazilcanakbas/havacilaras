@@ -1,0 +1,54 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "slug": "gayrimenkulde-2025-trendleri",
+      "title": {
+        "tr": "Gayrimenkulde 2025 Trendleri",
+        "en": "Real Estate Trends in 2025"
+      },
+      "excerpt": {
+        "tr": "2025 yılında gayrimenkul sektörünü şekillendirecek ana eğilimler ve fırsatlar...",
+        "en": "Key trends and opportunities shaping the real estate sector in 2025..."
+      },
+      "content": {
+        "tr": [
+          "Sürdürülebilirlik ve enerji verimliliği, yeni projelerde belirleyici faktörler olmaya devam edecek.",
+          "Akıllı yaşam teknolojileri ve karma kullanımlı projeler öne çıkıyor."
+        ],
+        "en": [
+          "Sustainability and energy efficiency will remain key factors in new projects.",
+          "Smart living technologies and mixed-use developments are on the rise."
+        ]
+      },
+      "date": "2025-06-01",
+      "image": "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg",
+      "tags": ["gayrimenkul", "trend", "sürdürülebilirlik"]
+    },
+    {
+      "id": 2,
+      "slug": "havacilikta-yesil-donusum",
+      "title": {
+        "tr": "Havacılıkta Yeşil Dönüşüm",
+        "en": "Green Transformation in Aviation"
+      },
+      "excerpt": {
+        "tr": "Karbon ayak izini azaltmaya yönelik yeni teknolojiler ve yatırımlar...",
+        "en": "New technologies and investments to reduce carbon footprint..."
+      },
+      "content": {
+        "tr": [
+          "Sürdürülebilir havacılık yakıtları ve elektrikli tahrik sistemleri gündemde.",
+          "Havalimanlarında enerji verimliliği uygulamaları hız kazanıyor."
+        ],
+        "en": [
+          "Sustainable aviation fuels and electric propulsion systems are in focus.",
+          "Energy efficiency initiatives at airports are accelerating."
+        ]
+      },
+      "date": "2025-05-15",
+      "image": "https://images.pexels.com/photos/799869/pexels-photo-799869.jpeg",
+      "tags": ["havacılık", "sürdürülebilirlik"]
+    }
+  ]
+}

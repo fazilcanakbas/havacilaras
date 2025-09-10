@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import {
   ArrowRight,
@@ -19,6 +19,7 @@ import {
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getProject } from "@/app/services/projects.service";
 
 
 /* -------------------- DUMMY DATA (İlerde DB'den çekilecek) -------------------- */
@@ -31,8 +32,8 @@ const projectsData: Record<string, any> = {
     plainText: "Maldivler — Angolitheemu Adası. Yatırım & Lüks yaşam birleşimi.",
     plainTextEn: "Maldives — Angolitheemu Island. Investment meets luxury living.",
     logo: "/maldiveslogopng.png",
-  slogan: "Sadece Bir Tatil Değil, Bir Deneyim",
-  sloganEn: "Not Just a Holiday, an Experience",
+    slogan: "Sadece Bir Tatil Değil, Bir Deneyim",
+    sloganEn: "Not Just a Holiday, an Experience",
     overview: {
       description:
         "Shellwe by Havacılar; sürdürülebilir, izole konumda premium konutlar sunan; yatırımcı hakları devlet güvencesi ile korunmuş bir Maldivler projesidir. 49+50 yıl kullanım hakkı, yıllık yönetim ve kiralama opsiyonları ile yatırımcıya güçlü fırsatlar sağlar.",
@@ -63,68 +64,68 @@ const projectsData: Record<string, any> = {
         { label: "Payback Period", value: "~11.1 Years" },
       ],
     },
-  models: [
+    models: [
       {
-    title: "Iglo Modeli — 1+1",
-    titleEn: "Igloo Model — 1+1",
+        title: "Iglo Modeli — 1+1",
+        titleEn: "Igloo Model — 1+1",
         size: "Net 63.9 m² • Brüt 108 m²",
-    sizeEn: "Net 63.9 m² • Gross 108 m²",
+        sizeEn: "Net 63.9 m² • Gross 108 m²",
         price: "250.000 - 275.000 USD",
         desc: "Modern tasarımlı, 1+1 iglo villa. Eşyalı teslim.",
-    descEn: "Modern design 1+1 igloo villa. Fully furnished delivery.",
+        descEn: "Modern design 1+1 igloo villa. Fully furnished delivery.",
         images: ["/model-iglo.jpg", "/gallery-2.jpg"],
         img: "/model-iglo.jpg",
       },
       {
-    title: "Karides Modeli — 1+1",
-    titleEn: "Shrimp Model — 1+1",
+        title: "Karides Modeli — 1+1",
+        titleEn: "Shrimp Model — 1+1",
         size: "Net 69.6 m² • Brüt 122 m²",
-    sizeEn: "Net 69.6 m² • Gross 122 m²",
+        sizeEn: "Net 69.6 m² • Gross 122 m²",
         price: "299.000 USD",
         desc: "Deniz kabuğu formunda 1+1 villa. Premium yaşam.",
-    descEn: "Seashell-inspired 1+1 villa. Premium living.",
+        descEn: "Seashell-inspired 1+1 villa. Premium living.",
         images: ["/model-karides.jpg", "/gallery-3.jpg"],
         img: "/model-karides.jpg",
       },
       {
-    title: "Silindir Modeli — 3+1",
-    titleEn: "Cylinder Model — 3+1",
+        title: "Silindir Modeli — 3+1",
+        titleEn: "Cylinder Model — 3+1",
         size: "Net 105.6 m² • Brüt 182 m²",
-    sizeEn: "Net 105.6 m² • Gross 182 m²",
+        sizeEn: "Net 105.6 m² • Gross 182 m²",
         price: "455.000 USD",
         desc: "Aileler için geniş 3+1 villa. Panoramik manzara.",
-    descEn: "Spacious 3+1 villa for families. Panoramic views.",
+        descEn: "Spacious 3+1 villa for families. Panoramic views.",
         images: ["/model-silindir.jpg", "/gallery-4.jpg"],
         img: "/model-silindir.jpg",
       },
     ],
-  experiences: [
+    experiences: [
       {
-    title: "Su Sporları & Aktiviteler",
-    titleEn: "Water Sports & Activities",
-    subtitle: "Scuba, surf, tekne gezintileri ve zengin aktivite seçenekleri.",
-    subtitleEn: "Scuba, surfing, boat trips and a wide range of activities.",
+        title: "Su Sporları & Aktiviteler",
+        titleEn: "Water Sports & Activities",
+        subtitle: "Scuba, surf, tekne gezintileri ve zengin aktivite seçenekleri.",
+        subtitleEn: "Scuba, surfing, boat trips and a wide range of activities.",
         img: "https://turkey.meridianadventuredive.com/wp-content/uploads/2020/10/meridian-adventure-dive-turkey-activities-2.jpg",
       },
       {
-    title: "Spa & Wellness",
-    titleEn: "Spa & Wellness",
-    subtitle: "Doğayla baş başa wellness alanları ve kişiye özel programlar.",
-    subtitleEn: "Nature-inspired wellness areas and personalized programs.",
+        title: "Spa & Wellness",
+        titleEn: "Spa & Wellness",
+        subtitle: "Doğayla baş başa wellness alanları ve kişiye özel programlar.",
+        subtitleEn: "Nature-inspired wellness areas and personalized programs.",
         img: "https://www.regnumhotels.com/media/v54bwnw3/regnumcarya_greendoor-spa-wellness-5-card.jpg",
       },
       {
-    title: "Gurme Restoranlar",
-    titleEn: "Gourmet Restaurants",
-    subtitle: "Dünya mutfağı, deniz ürünleri ve fine dining deneyimi.",
-    subtitleEn: "World cuisine, seafood and fine dining experience.",
+        title: "Gurme Restoranlar",
+        titleEn: "Gourmet Restaurants",
+        subtitle: "Dünya mutfağı, deniz ürünleri ve fine dining deneyimi.",
+        subtitleEn: "World cuisine, seafood and fine dining experience.",
         img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/92/38/ae/jie-istanbul-atasehir.jpg?w=900&h=500&s=1",
       },
       {
-    title: "Özel Plaj & Lounge",
-    titleEn: "Private Beach & Lounge",
-    subtitle: "İzole plaj alanları, VIP servis ve premium beach club.",
-    subtitleEn: "Secluded beach areas, VIP service, and a premium beach club.",
+        title: "Özel Plaj & Lounge",
+        titleEn: "Private Beach & Lounge",
+        subtitle: "İzole plaj alanları, VIP servis ve premium beach club.",
+        subtitleEn: "Secluded beach areas, VIP service, and a premium beach club.",
         img: "https://images.trvl-media.com/lodging/15000000/14630000/14630000/14629943/5545a525.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill",
       },
     ],
@@ -142,26 +143,26 @@ const projectsData: Record<string, any> = {
       "/Resim15.png",
     ],
     youtube: "https://www.youtube.com/embed/YOUTUBE_VIDEO_ID",
-  advantages: [
+    advantages: [
       {
-    icon: <ShieldCheck className="text-[#3A7BD5]" size={24} />,
-    text: "Devlet güvencesi ile yatırım korunur.",
-    textEn: "Your investment is protected under state assurance.",
+        icon: <ShieldCheck className="text-[#3A7BD5]" size={24} />,
+        text: "Devlet güvencesi ile yatırım korunur.",
+        textEn: "Your investment is protected under state assurance.",
       },
       {
-    icon: <Globe2 className="text-[#3A7BD5]" size={24} />,
-    text: "Schengen & Commonwealth vize kolaylığı.",
-    textEn: "Schengen & Commonwealth visa convenience.",
+        icon: <Globe2 className="text-[#3A7BD5]" size={24} />,
+        text: "Schengen & Commonwealth vize kolaylığı.",
+        textEn: "Schengen & Commonwealth visa convenience.",
       },
       {
-    icon: <Briefcase className="text-[#3A7BD5]" size={24} />,
-    text: "Golden Wings işletme garantisi ve kiralama desteği.",
-    textEn: "Golden Wings operational guarantee and rental support.",
+        icon: <Briefcase className="text-[#3A7BD5]" size={24} />,
+        text: "Golden Wings işletme garantisi ve kiralama desteği.",
+        textEn: "Golden Wings operational guarantee and rental support.",
       },
       {
-    icon: <Plane className="text-[#3A7BD5]" size={24} />,
-    text: "Yılda 1 hafta ücretsiz tatil hediyesi.",
-    textEn: "One week free holiday per year gift.",
+        icon: <Plane className="text-[#3A7BD5]" size={24} />,
+        text: "Yılda 1 hafta ücretsiz tatil hediyesi.",
+        textEn: "One week free holiday per year gift.",
       },
     ],
     contact: {
@@ -169,17 +170,464 @@ const projectsData: Record<string, any> = {
       email: "info@havacilar.com.tr",
     },
   },
+
+  "laventure-cyprus": {
+    slug: "laventure-cyprus",
+    mainImage: "/hero3.jpg",
+    mainTitle: "L’aventure",
+    highlightedText: "by Havacılar",
+    plainText: "Kuzey Kıbrıs — Tatlısu. Akdeniz’in incisi, lüks yaşam ve yatırım fırsatı.",
+    plainTextEn: "Northern Cyprus — Tatlısu. Jewel of the Mediterranean, luxury living and investment opportunity.",
+    logo: "/laventure-1.png",
+    slogan: "Lüks, Doğa ve Huzurun Buluşma Noktası",
+    sloganEn: "Where Luxury Meets Nature and Serenity",
+    overview: {
+      description:
+        "L’aventure by Havacılar; Kuzey Kıbrıs’ın Tatlısu bölgesinde, Akdeniz’in panoramik manzarasına sahip 66 üniteli lüks bir yaşam alanı sunar. 2026 yılında teslim edilecek olan proje, ailelerin, gençlerin ve yatırımcıların güvenle tercih edebileceği ayrıcalıklı bir yaşam tarzı vaat ediyor.",
+      descriptionEn:
+        "L’aventure by Havacılar, located in Tatlısu, Northern Cyprus, offers 66 luxury units with breathtaking Mediterranean views. Set for delivery in 2026, the project promises an exclusive lifestyle for families, young professionals, and investors alike.",
+      badges: [
+        "2026 Teslim",
+        "Tatlısu’nun En Prestijli Projesi",
+        "Akdeniz Panoramik Manzara",
+        "Girne Merkez’e 20 dk",
+      ],
+      badgesEn: [
+        "Delivery in 2026",
+        "Most Prestigious Project in Tatlısu",
+        "Mediterranean Panoramic View",
+        "20 min to Kyrenia Center",
+      ],
+      quickStats: [
+        { label: "Toplam Ünite", value: "66" },
+        { label: "Teslim", value: "2026" },
+        { label: "Başlangıç Fiyat", value: "Sorunuz" },
+        { label: "Tipler", value: "1+1, 2+1, Loft & Studio" },
+      ],
+      quickStatsEn: [
+        { label: "Total Units", value: "66" },
+        { label: "Delivery", value: "2026" },
+        { label: "Starting Price", value: "On Request" },
+        { label: "Types", value: "1+1, 2+1, Loft & Studio" },
+      ],
+    },
+    models: [
+      {
+        title: "1+1 Loft",
+        titleEn: "1+1 Loft",
+        size: "1 Yatak Odası • 1 Salon • 1 Banyo • Ön Bahçe • Mutfak",
+        sizeEn: "1 Bedroom • 1 Living Room • 1 Bathroom • Front Garden • Kitchen",
+        // price: "Sorunuz",
+        desc: "Modern tasarım ve deniz manzaralı 1+1 loft daireler.",
+        descEn: "Modern design 1+1 loft apartments with sea views.",
+        images: ["/laventure-1plus1loft2.jpg","/laventure-1plus1loft.jpg","/laventure-1plus1loft3.jpg"],
+        img: "/laventure-1plus1loft2.jpg",
+      },
+      {
+        title: "2+1 Loft",
+        titleEn: "2+1 Loft",
+        size: "2 Yatak Odası • 1 Salon • 1 Banyo • Ön Bahçe • Mutfak • Teras",
+        sizeEn: "2 Bedrooms • 1 Living Room • 1 Bathroom • Front Garden • Kitchen • Terrace",
+        // price: "Sorunuz",
+        desc: "Geniş aileler için şık ve modern 2+1 loft daireler.",
+        descEn: "Stylish and modern 2+1 loft apartments ideal for families.",
+        images: ["/laventure-2plus1loft.png","/laventure-2plus1loft1.jpg","/laventure-2plus1loft2.jpg","/laventure-2plus1loft3.jpg"],
+        img: "/laventure-2plus1loft.png",
+      },
+      {
+        title: "1+1 Daire",
+        titleEn: "1+1 Apartment",
+        size: "1 Yatak Odası • 1 Salon • 1 Banyo • Ön Bahçe • Mutfak",
+        sizeEn: "1 Bedroom • 1 Living Room • 1 Bathroom • Front Garden • Kitchen",
+        // price: "Sorunuz",
+        desc: "Konforlu ve zarif bir şekilde döşenmiş 1+1 daireler.",
+        descEn: "Comfortable and elegantly furnished 1+1 apartments.",
+        images: ["/laventure-1plus1.png","/laventure-1plus1-1.jpg","/laventure-1plus1-2.jpg","/laventure-1plus1-3.jpg"],
+        img: "/laventure-1plus1.png",
+      },
+      {
+        title: "Stüdyo",
+        titleEn: "Studio",
+        size: "1 Yatak Odası • 1 Salon • 1 Banyo • Ön Bahçe • Mutfak • Depo Alanı",
+        sizeEn: "1 Bedroom • 1 Living Room • 1 Bathroom • Front Garden • Kitchen • Storage",
+        // price: "Sorunuz",
+        desc: "Minimalist yaşamı tercih edenler için stüdyo daireler.",
+        descEn: "Studio apartments designed for minimalist living.",
+        images: ["/laventure-studio.png","/laventure-studio1.jpg"],
+        img: "/laventure-studio.png",
+      },
+    ],
+    experiences: [
+      {
+        title: "Doğa & Huzur",
+        titleEn: "Nature & Serenity",
+        subtitle: "Meditasyon bahçeleri, yürüyüş yolları ve sakin yaşam alanları.",
+        subtitleEn: "Meditation gardens, walking paths, and serene living spaces.",
+        img: "/dogahuzur.jpg",
+      },
+      {
+        title: "Spor & Aktivite",
+        titleEn: "Sports & Activities",
+        subtitle: "Bisiklet yolları, açık hava spor alanları ve fitness imkanları.",
+        subtitleEn: "Cycling paths, outdoor sports areas, and fitness facilities.",
+        img: "/laventure-spor.jpg",
+      },
+      {
+        title: "Restoran & Sosyal Alanlar",
+        titleEn: "Restaurant & Social Areas",
+        subtitle: "Şık restoran, snack bar ve barbekü alanları.",
+        subtitleEn: "Elegant restaurant, snack bar, and barbecue areas.",
+        img: "/laventure-restorant.jpg",
+      },
+    ],
+    financial: {
+      info: "Yüksek yatırım potansiyeline sahip, Akdeniz’in en prestijli bölgelerinden birinde benzersiz proje.",
+      infoEn:
+        "A unique project with high investment potential in one of the Mediterranean’s most prestigious regions.",
+    },
+    gallery: [
+      "/laventure-gallery1.jpg",
+      "/laventure-gallery2.jpg",
+      "/laventure-gallery3.jpg",
+      "/laventure-gallery4.jpg",
+    ],
+    youtube: "https://www.youtube.com/embed/YOUTUBE_VIDEO_ID",
+    advantages: [
+      {
+        icon: <ShieldCheck className="text-[#3A7BD5]" size={24} />,
+        text: "2026’da teslim garantisi.",
+        textEn: "Guaranteed delivery in 2026.",
+      },
+      {
+        icon: <Globe2 className="text-[#3A7BD5]" size={24} />,
+        text: "Girne Merkez’e 20 dakika.",
+        textEn: "20 minutes to Kyrenia Center.",
+      },
+      {
+        icon: <Briefcase className="text-[#3A7BD5]" size={24} />,
+        text: "Prestijli Tatlısu bölgesinde yatırım fırsatı.",
+        textEn: "Investment opportunity in prestigious Tatlısu area.",
+      },
+      {
+        icon: <Plane className="text-[#3A7BD5]" size={24} />,
+        text: "Ercan Havalimanı’na 40 dakika.",
+        textEn: "40 minutes to Ercan Airport.",
+      },
+    ],
+    contact: {
+      phone: "+90 530 620 06 85",
+      email: "info@havacilar.com.tr",
+    },
+  },
+ "glorious-deluxe-kemer": {
+    slug: "glorious-deluxe-kemer",
+    mainImage: "/kemerhero.jpg",
+    mainTitle: "Glorious Deluxe",
+    highlightedText: "Kemer",
+    plainText: "Antalya — Kemer. Doğayla iç içe, modern lüks villalar.",
+    plainTextEn: "Antalya — Kemer. Modern luxury villas in the heart of nature.",
+    logo: "/kemerlogo.png",
+    slogan: "İhtişamın Doğayla Buluştuğu Yer",
+    sloganEn: "Where Splendor Meets Nature",
+    overview: {
+      description:
+        "Glorious Deluxe Kemer; Antalya’nın gözde beldesi Kemer’de, 2183 m² arsa üzerine Green House konseptiyle inşa edilmiş 6 müstakil tripleks villadan oluşmaktadır. Doğayla iç içe, modern konfor ve tarihi zenginliklerin birleştiği bu proje, size tatil gibi bir yaşam sunar.",
+      descriptionEn:
+        "Glorious Deluxe Kemer, located in Antalya’s Kemer district, consists of 6 detached triplex villas built on a 2183 m² land with Green House concept. Combining nature, modern comfort, and historical richness, it offers you a life like a holiday.",
+      badges: [
+        "Green House Konsepti",
+        "6 Müstakil Villa",
+        "Doğa & Tarih Zenginliği",
+        "Kemer’in Kalbinde",
+      ],
+      badgesEn: [
+        "Green House Concept",
+        "6 Detached Villas",
+        "Nature & Historical Richness",
+        "In the Heart of Kemer",
+      ],
+      quickStats: [
+        { label: "Toplam Arsa Alanı", value: "2183 m²" },
+        { label: "Villa Sayısı", value: "6" },
+        { label: "Net Alan", value: "230 m²" },
+        { label: "Brüt Alan", value: "300 m²" },
+      ],
+      quickStatsEn: [
+        { label: "Total Land Area", value: "2183 m²" },
+        { label: "Number of Villas", value: "6" },
+        { label: "Net Area", value: "230 m²" },
+        { label: "Gross Area", value: "300 m²" },
+      ],
+    },
+    models: [
+      {
+        title: "Tripleks Villa — 5.5+1",
+        titleEn: "Triplex Villa — 5.5+1",
+        size: "Net 230 m² • Brüt 300 m² • Ortalama Bahçe 370 m²",
+        sizeEn: "Net 230 m² • Gross 300 m² • Avg. Garden 370 m²",
+        price: "Sorunuz",
+        desc: "Her köşesi 1. sınıf malzemelerle inşa edilmiş, Green House konseptli, modern tripleks villalar.",
+        descEn: "Triplex villas with Green House concept, built with first-class materials and modern elegance.",
+        images: ["/glorious-villa1.jpg", "/glorious-villa2.jpg"],
+        img: "/glorious-villa1.jpg",
+      },
+    ],
+    experiences: [
+      {
+        title: "Doğayla İç İçe",
+        titleEn: "In Touch with Nature",
+        subtitle: "Dağ manzaraları, orman esintileri ve denize yakın konum.",
+        subtitleEn: "Mountain views, forest breezes, and proximity to the sea.",
+        img: "/glorious-nature.jpg",
+      },
+      {
+        title: "Green House Özellikleri",
+        titleEn: "Green House Features",
+        subtitle: "Güneş panelleri, doğal kaynak suyu, elektrikli araç şarjı.",
+        subtitleEn: "Solar panels, natural spring water, EV charging.",
+        img: "/glorious-greenhouse.jpg",
+      },
+      {
+        title: "Özel Konforlar",
+        titleEn: "Exclusive Comforts",
+        subtitle: "Özel havuz, sauna, ateş çukuru, akıllı ev sistemi.",
+        subtitleEn: "Private pool, sauna, fire pit, smart home system.",
+        img: "/glorious-comfort.jpg",
+      },
+    ],
+    financial: {
+      info: "Glorious Deluxe Kemer; modern lüks, sürdürülebilir enerji ve yüksek yatırım potansiyelini birleştiriyor.",
+      infoEn:
+        "Glorious Deluxe Kemer combines modern luxury, sustainable energy, and high investment potential.",
+    },
+    gallery: [
+      "/glorious-gallery1.jpg",
+      "/glorious-gallery2.jpg",
+      "/glorious-gallery3.jpg",
+    ],
+    youtube: "https://www.youtube.com/embed/YOUTUBE_VIDEO_ID",
+    advantages: [
+      {
+        icon: <ShieldCheck className="text-[#3A7BD5]" size={24} />,
+        text: "Green House konsepti ile sürdürülebilir yaşam.",
+        textEn: "Sustainable living with Green House concept.",
+      },
+      {
+        icon: <Globe2 className="text-[#3A7BD5]" size={24} />,
+        text: "Kemer’in en özel lokasyonunda.",
+        textEn: "Located in the most exclusive area of Kemer.",
+      },
+      {
+        icon: <Briefcase className="text-[#3A7BD5]" size={24} />,
+        text: "Modern lüks ve yüksek yatırım potansiyeli.",
+        textEn: "Modern luxury and high investment potential.",
+      },
+      {
+        icon: <Plane className="text-[#3A7BD5]" size={24} />,
+        text: "Doğa, tarih ve deniz bir arada.",
+        textEn: "Nature, history, and sea together.",
+      },
+    ],
+    contact: {
+      phone: "+90 242 745 08 09",
+      email: "info@havacilar.com.tr",
+    },
+  },
+  "aquamarine-cyprus": {
+    slug: "aquamarine-cyprus",
+    mainImage: "/aquamarine-hero.jpg",
+    mainTitle: "Aquamarine Nuance",
+    highlightedText: "by Havacılar",
+    plainText: "Kuzey Kıbrıs — Tatlısu. Lüks, manzara ve yatırımın birleştiği yaşam alanı.",
+    plainTextEn: "Northern Cyprus — Tatlısu. Luxury living with breathtaking views and investment opportunity.",
+    logo: "/aquamarine-logo.png",
+    slogan: "Lüks ve Huzurun Senfonisi",
+    sloganEn: "A Symphony of Luxury and Serenity",
+    overview: {
+      description:
+        "Aquamarine Nuance; Kuzey Kıbrıs Tatlısu bölgesinde, 106 lüks üniteden oluşan prestijli bir konut projesidir. 34 stüdyo, 36 adet 1+1 ve 36 adet 2+1 daire seçenekleriyle farklı ihtiyaçlara hitap eder. Akdeniz’in nefes kesici manzarasıyla modern yaşamın inceliklerini birleştirir.",
+      descriptionEn:
+        "Aquamarine Nuance, located in Tatlısu, Northern Cyprus, is a prestigious residential project with 106 luxury units. Offering 34 studios, 36 one-bedroom, and 36 two-bedroom apartments, it combines the elegance of modern living with breathtaking Mediterranean views.",
+      badges: [
+        "Toplam 106 Ünite",
+        "Tatlısu’da Prestijli Lokasyon",
+        "Akdeniz Panoramik Manzara",
+        "Girne Merkez’e 25 dk",
+      ],
+      badgesEn: [
+        "106 Units in Total",
+        "Prestigious Location in Tatlısu",
+        "Mediterranean Panoramic View",
+        "25 min to Kyrenia Center",
+      ],
+      quickStats: [
+        { label: "Toplam Ünite", value: "106" },
+        { label: "Ünite Tipleri", value: "Stüdyo, 1+1, 2+1" },
+        { label: "Teslim", value: "Sorunuz" },
+        { label: "Başlangıç Fiyat", value: "Sorunuz" },
+      ],
+      quickStatsEn: [
+        { label: "Total Units", value: "106" },
+        { label: "Unit Types", value: "Studio, 1+1, 2+1" },
+        { label: "Delivery", value: "On Request" },
+        { label: "Starting Price", value: "On Request" },
+      ],
+    },
+    models: [
+      {
+        title: "Stüdyo",
+        titleEn: "Studio",
+        size: "1 Yatak Odası • 1 Salon • 1 Banyo • Mutfak • Teras",
+        sizeEn: "1 Bedroom • 1 Living Room • 1 Bathroom • Kitchen • Terrace",
+        price: "Sorunuz",
+        desc: "Minimalist yaşamı tercih edenler için modern stüdyo daireler.",
+        descEn: "Modern studio apartments designed for minimalist living.",
+        images: ["/aquamarine-studio.jpg"],
+        img: "/aquamarine-studio.jpg",
+      },
+      {
+        title: "1+1 Daire",
+        titleEn: "1+1 Apartment",
+        size: "1 Yatak Odası • 1 Salon • 1 Banyo • Ön Bahçe • Mutfak",
+        sizeEn: "1 Bedroom • 1 Living Room • 1 Bathroom • Front Garden • Kitchen",
+        price: "Sorunuz",
+        desc: "Konforlu yaşam alanı sunan 1+1 daireler.",
+        descEn: "1+1 apartments offering comfortable living spaces.",
+        images: ["/aquamarine-1plus1.jpg"],
+        img: "/aquamarine-1plus1.jpg",
+      },
+      {
+        title: "2+1 Daire",
+        titleEn: "2+1 Apartment",
+        size: "2 Yatak Odası • 1 Salon • 1 Banyo • Ön Bahçe • Mutfak • Teras",
+        sizeEn: "2 Bedrooms • 1 Living Room • 1 Bathroom • Front Garden • Kitchen • Terrace",
+        price: "Sorunuz",
+        desc: "Geniş aileler için şık ve modern 2+1 daireler.",
+        descEn: "Stylish and modern 2+1 apartments ideal for families.",
+        images: ["/aquamarine-2plus1.jpg"],
+        img: "/aquamarine-2plus1.jpg",
+      },
+    ],
+    experiences: [
+      {
+        title: "Sosyal Alanlar",
+        titleEn: "Social Areas",
+        subtitle: "Restoran, snack bar, havuz bar, fast food ve dondurmacı.",
+        subtitleEn: "Restaurant, snack bar, pool bar, fast food, and ice cream shop.",
+        img: "/aquamarine-social.jpg",
+      },
+      {
+        title: "Spor & Wellness",
+        titleEn: "Sports & Wellness",
+        subtitle: "Yürüyüş yolları, bisiklet parkurları, açık spor alanı, spa & meditasyon bahçesi.",
+        subtitleEn: "Walking paths, cycling routes, outdoor sports area, spa & meditation garden.",
+        img: "/aquamarine-sport.jpg",
+      },
+      {
+        title: "Aile & Çocuk Alanları",
+        titleEn: "Family & Kids Areas",
+        subtitle: "Açık/kapalı oyun alanları, mini kulüp ve çocuk havuzu.",
+        subtitleEn: "Indoor/outdoor playgrounds, mini club, and kids’ pool.",
+        img: "/aquamarine-family.jpg",
+      },
+    ],
+    financial: {
+      info: "Aquamarine Nuance, 106 ünitesiyle yüksek yatırım potansiyeli ve yıl boyu lüks yaşam imkanı sunar.",
+      infoEn:
+        "Aquamarine Nuance offers high investment potential and year-round luxury living with its 106 units.",
+    },
+    gallery: [
+      "/aquamarine-gallery1.jpg",
+      "/aquamarine-gallery2.jpg",
+      "/aquamarine-gallery3.jpg",
+    ],
+    youtube: "https://www.youtube.com/embed/YOUTUBE_VIDEO_ID",
+    advantages: [
+      {
+        icon: <ShieldCheck className="text-[#3A7BD5]" size={24} />,
+        text: "106 ünitelik prestijli yaşam projesi.",
+        textEn: "Prestigious residential project with 106 units.",
+      },
+      {
+        icon: <Globe2 className="text-[#3A7BD5]" size={24} />,
+        text: "Tatlısu’nun en değerli lokasyonunda.",
+        textEn: "Located in the most valuable area of Tatlısu.",
+      },
+      {
+        icon: <Briefcase className="text-[#3A7BD5]" size={24} />,
+        text: "Aileler ve yatırımcılar için cazip fırsatlar.",
+        textEn: "Attractive opportunities for families and investors.",
+      },
+      {
+        icon: <Plane className="text-[#3A7BD5]" size={24} />,
+        text: "Ercan Havalimanı’na 40 dk, Girne’ye 25 dk.",
+        textEn: "40 min to Ercan Airport, 25 min to Kyrenia.",
+      },
+    ],
+    contact: {
+      phone: "+90 530 620 06 85",
+      email: "info@havacilar.com.tr",
+    },
+  },
 };
+
 
 /* -------------------- PAGE -------------------- */
 export default function ProjectDetailPage() {
   const { slug } = useParams();
-  const project = projectsData[slug as string];
+  const [apiProject, setApiProject] = useState<any | null>(null);
+  const project = useMemo(() => {
+    if (apiProject) {
+      // Map backend project shape into the local UI model minimally
+      return {
+        slug: apiProject.slug,
+        mainImage: apiProject.coverImage || "/hero1.jpg",
+        mainTitle: apiProject.title?.tr || apiProject.title?.en || apiProject.slug,
+        highlightedText: "",
+        plainText: apiProject.description?.tr || "",
+        plainTextEn: apiProject.description?.en || "",
+        logo: apiProject.coverImageWithLogo || "/maldiveslogopng.png",
+        slogan: "",
+        sloganEn: "",
+        overview: {
+          description: apiProject.description?.tr || "",
+          descriptionEn: apiProject.description?.en || "",
+          badges: [],
+          badgesEn: [],
+          quickStats: [],
+          quickStatsEn: [],
+        },
+        models: apiProject.models || [],
+        experiences: apiProject.experiences || [],
+        financial: apiProject.financial || {},
+        gallery: apiProject.gallery || [],
+        youtube: apiProject.video?.url || "https://www.youtube.com/embed/YOUTUBE_VIDEO_ID",
+        advantages: apiProject.advantages || [],
+        contact: { phone: "+90 242 745 08 09", email: "info@havacilar.com.tr" },
+      };
+    }
+    return projectsData[slug as string];
+  }, [apiProject, slug]);
 
   const [selectedModel, setSelectedModel] = useState<any>(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const { language, t } = useLanguage();
-const letters = project.highlightedText.split("");
+  const letters = (project?.highlightedText || "").split("");
+
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        if (slug) {
+          const p = await getProject(String(slug));
+          if (mounted) setApiProject(p);
+        }
+      } catch {
+        if (mounted) setApiProject(null);
+      }
+    })();
+    return () => { mounted = false; };
+  }, [slug]);
 
   // Her harf için animasyon ayarları
   const container = {
