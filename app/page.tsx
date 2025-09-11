@@ -91,30 +91,31 @@ export default function Home() {
 
   // Gayrimenkul Yatırım Projeleri
   const realEstateProjects = [
+   {
+    name: "L'AVENTURE",
+    slug: "laventure-cyprus",
+    imageLogo: '/laventure 1.jpg',
+    imagePlain: '/laventure 2.jpg',
+    location: 'Alanya',
+    delivery: '2026'
+  },
+  {
+    name: 'SHELLWE',
+    slug: "shellwe-maldives",
+    imageLogo: '/shellwe 1.jpg',
+    imagePlain: '/shellwe2.jpg',
+    location: 'Alanya',
+    delivery: '2026'
+  },
+    
     {
-      name: "L'AVENTURE",
-      slug: "laventure-cyprus",
-      imageLogo: '/laventure-1.png',
-      imagePlain: '/laventure2.jpg',
-      location: 'Alanya',
-      delivery: '2026'
-    },
-    {
-      name: 'SHELLWE',
-      slug: "shellwe-maldives",
-      imageLogo: '/maldiveslogopng.png',
-      imagePlain: '/model-iglo.jpg',
-      location: 'Alanya',
-      delivery: '2026'
-    },
-    {
-      name: 'GLORIOUS DELUXE KEMER',
-      slug: "glorious-deluxe-kemer",
-      imageLogo: '/kemerlogo.png',
-      imagePlain: '/kemerhero.jpg',
-      location: 'Antalya',
-      delivery: '2025'
-    }
+    name: 'GLORIES DELUXE KEMER',
+    slug: "glorious-deluxe-kemer",
+    imageLogo: '/gloruius 1.jpg',
+    imagePlain: '/gloruius 2.jpg',
+    location: 'Alanya',
+    delivery: '2025'
+  }
     // {
     //   name: 'MY HOUSE Elegant',
     //   imageLogo:
